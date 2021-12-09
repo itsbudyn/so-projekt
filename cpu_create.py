@@ -18,6 +18,7 @@ def create_processes():
         exit(-1)
 
     for i in range(len(burst_times)):
+        # PID , arrival , burst , Exit , TurnAround, Wait
         process=[0,0,0,0,0,0,0]
         process[PID]=i+1
         process[ARRIVAL]=arriv_times[i]
