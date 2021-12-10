@@ -32,23 +32,20 @@ def do_sjf(processes):
     # Pętla nanosząca procesy na oś czasu
     for i in range(len(timeline)):
         t+=1
-        p_queue=[]
+        p_queue=[]              # kolejka procesów, gdzie będą sortowane po burst time
         for i in processes:
-            if i[ARRIVAL] <= t: p_queue.append(i)
+            if i[ARRIVAL] <= t: p_queue.append(i)   # dodawanie procesów, które przybyły
 
-        print(processes)
-        print(p_queue)
-
-        if len(p_queue)==0:
+        if len(p_queue)==0:     # jeżeli żaden proces nie przybył
             continue
         else:
-            p_queue=sorted(p_queue, key=lambda x: x[BURST])
-            pos_info=p_queue[0][PID]-1
-            pos=processes.index(p_queue[0])
+            p_queue=sorted(p_queue, key=lambda x: x[BURST])     # sortowanie procesów w kolejce po czasie wykonania
+            pos_info=p_queue[0][PID]-1          # uzyskiwanie pozycji procesu w tabeli processes_info
+            pos=processes.index(p_queue[0])     # uzyskiwanie pozycji procesu w tabeli processes - różnica pomiędzy tą a poprzednią tabelą jest taka, że z tamtej usuwamy procesy
 
-            timeline[t]=p_queue[0][PID]
-            
-            processes[pos][REMAINING]-=1
+            timeline[t]=p_queue[0][PID]         # nanoszenie PID-u procesu na oś czasu
+
+            processes[pos][REMAINING]-=1        # zbijanie pozostałego czasu wykonywania procesu o 1
             if p_queue[0][REMAINING]==0:
                 del processes[pos]
                 processes_info[pos_info][EXIT]=t+1
@@ -77,7 +74,7 @@ def do_sjf(processes):
     print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w))
 
     # Wyświetlanie osi czasu
-    print("\n",timeline)
+    print("\n0",timeline,max_time)
 
 if __name__ == '__main__':
     print("Proszę uruchomić plik main.py")
