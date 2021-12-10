@@ -33,7 +33,7 @@ def do_fifo(processes):
     # Pętla nanosząca procesy na oś czasu
     for i in range(len(timeline)):
         t+=1
-        if t<processes[0][1]:   # jeżeli proces jeszcze nie dotarł, czekamy na niego
+        if t<processes[0][1]:   # jeżeli proces jeszcze nie dotarł, czekamy na niego - nanosimy pid 0
             continue
         else:
             timeline[t]=processes[0][PID]       # wpisanie na pozycji osi czasu PID-u procesu
@@ -52,10 +52,11 @@ def do_fifo(processes):
     ta_total=0
     w_total=0
     for i in processes_info:
+        # czasy będą sumowane podczas wyświetlania tabeli
         ta_total+=i[TURNAROUND]     # Sumowanie czasów turnaround
         w_total+=i[WAIT]            # Sumowanie czasów oczekiwania
         for j in range(len(i)):     # Wyświetlanie tabeli
-            if j!=REMAINING: print(i[j],end="\t")
+            if j!=REMAINING: print(i[j],end="\t")   # warunek if aby nie wyświetlać pozostałego czasu - wiadomo, że wynosi on 0
         print("")
 
     # Obliczanie średnich
