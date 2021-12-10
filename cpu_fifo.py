@@ -67,7 +67,7 @@ def do_fifo(processes):
     print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w))
 
     # Wyświetlanie osi czasu
-    print("\n",timeline)
+    print("\n0",timeline,max_time)
 
 # gdyby ktoś przypadkiem uruchomił ten plik
 if __name__ == '__main__':
