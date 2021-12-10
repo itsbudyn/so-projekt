@@ -1,17 +1,9 @@
 # algorytm czasu procesora FIFO
 
 from sys import exit
+from keywords import *
 
 def do_fifo(processes):
-    # Słowa kluczowe, pomagające w indeksowaniu tablic
-    PID         = 0
-    ARRIVAL     = 1
-    BURST       = 2
-    EXIT        = 3
-    TURNAROUND  = 4
-    WAIT        = 5
-    REMAINING   = 6
-
     # Sortowanie procesów po czasie przybycia
     processes=sorted(processes, key=lambda x: x[ARRIVAL])
     

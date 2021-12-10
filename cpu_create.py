@@ -1,14 +1,7 @@
 from sys import exit
+from keywords import *
 
 def create_processes():
-    PID         = 0
-    ARRIVAL     = 1
-    BURST       = 2
-    EXIT        = 3
-    TURNAROUND  = 4
-    WAIT        = 5
-    REMAINING   = 6
-
     processes=[]
     arriv_times=list(map(int,str(input("Podaj czasy przybycia dla procesów: ")).split(" ")))
     burst_times=list(map(int,str(input("Podaj czasy wykonywania dla procesów: ")).split(" ")))
