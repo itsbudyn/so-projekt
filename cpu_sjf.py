@@ -2,7 +2,7 @@
 
 from sys import exit
 
-def do_rr(processes,quant):
+def do_sjf(processes):
     # Słowa kluczowe, pomagające w indeksowaniu tablic
     PID         = 0
     ARRIVAL     = 1
