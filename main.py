@@ -1,4 +1,3 @@
-from sys import exit
 from cpu_create import create_processes
 from cpu_fifo import do_fifo
 from cpu_sjf import do_sjf
