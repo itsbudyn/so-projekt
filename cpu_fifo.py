@@ -13,7 +13,7 @@ def do_fifo(processes):
     REMAINING   = 6
 
     # Sortowanie procesów po czasie przybycia
-    processes=sorted(processes, key=lambda x: x[1])
+    processes=sorted(processes, key=lambda x: x[ARRIVAL])
     
     # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
     processes_info=processes[:]
