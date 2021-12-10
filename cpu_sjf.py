@@ -46,12 +46,12 @@ def do_sjf(processes):
             timeline[t]=p_queue[0][PID]         # nanoszenie PID-u procesu na oś czasu
 
             processes[pos][REMAINING]-=1        # zbijanie pozostałego czasu wykonywania procesu o 1
-            if p_queue[0][REMAINING]==0:
-                del processes[pos]
-                processes_info[pos_info][EXIT]=t+1
-                processes_info[pos_info][TURNAROUND]=processes_info[pos_info][EXIT]-processes_info[pos_info][ARRIVAL]
-                processes_info[pos_info][WAIT]=processes_info[pos_info][TURNAROUND]-processes_info[pos_info][BURST]
-
+            if p_queue[0][REMAINING]==0:        # jeżeli czas procesu się skończył
+                del processes[pos]              # usunięcie procesu z tabeli processes
+                processes_info[pos_info][EXIT]=t+1  # Wpisanie czasu zakończenia procesu
+                processes_info[pos_info][TURNAROUND]=processes_info[pos_info][EXIT]-processes_info[pos_info][ARRIVAL]   # Wpisanie czasu turnaround (od przybycia do zakończenia)
+                processes_info[pos_info][WAIT]=processes_info[pos_info][TURNAROUND]-processes_info[pos_info][BURST]     # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
+                
     # Część z tabelą
     print("PID\tArrv.\tBurst\tExit\tTA\tWait")
 
