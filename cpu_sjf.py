@@ -35,18 +35,25 @@ def do_sjf(processes):
         p_queue=[]
         for i in processes:
             if i[ARRIVAL] <= t: p_queue.append(i)
+
+        print(processes)
+        print(p_queue)
+
         if len(p_queue)==0:
             continue
         else:
             p_queue=sorted(p_queue, key=lambda x: x[BURST])
+            pos_info=p_queue[0][PID]-1
+            pos=processes.index(p_queue[0])
+
             timeline[t]=p_queue[0][PID]
-            p_queue[0][REMAINING]-=1
+            
+            processes[pos][REMAINING]-=1
             if p_queue[0][REMAINING]==0:
-                pos=p_queue[0][PID]-1
                 del processes[pos]
-                processes_info[pos][EXIT]=t+1
-                processes_info[pos][TURNAROUND]=processes_info[pos][EXIT]-processes_info[pos][ARRIVAL]
-                processes_info[pos][WAIT]=processes_info[pos][TURNAROUND]-processes_info[pos][BURST]
+                processes_info[pos_info][EXIT]=t+1
+                processes_info[pos_info][TURNAROUND]=processes_info[pos_info][EXIT]-processes_info[pos_info][ARRIVAL]
+                processes_info[pos_info][WAIT]=processes_info[pos_info][TURNAROUND]-processes_info[pos_info][BURST]
 
     # Część z tabelą
     print("PID\tArrv.\tBurst\tExit\tTA\tWait")
