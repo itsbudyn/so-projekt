@@ -7,5 +7,9 @@ TURNAROUND  = 4
 WAIT        = 5
 REMAINING   = 6
 
+def exit_err(msg:str):
+    print("Błąd:",msg)
+    exit(-1)
+
 if __name__ == "__main__":
     print("Proszę uruchomić plik main.py")
