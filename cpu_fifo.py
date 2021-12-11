@@ -2,26 +2,22 @@
 from keywords import *
 
 def cpu_do_fifo(processes):
-    # Sortowanie procesów po czasie przybycia
-    processes=sorted(processes, key=lambda x: x[ARRIVAL])
+    processes=sorted(processes, key=lambda x: x[ARRIVAL])   # Sortowanie procesów po czasie przybycia
     
-    # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
-    processes_info=processes[:]
+    processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 
     # Obliczanie czasu wykonywania algorytmu
     max_time=0
     for i in processes:
         max_time+=i[2]
 
-    # Budowa osi czasu na podstawie czasu wykonywania algorytmu
-    timeline=[0 for i in range(max_time)]
+    timeline=[0 for i in range(max_time)]   # Budowa osi czasu na podstawie czasu wykonywania algorytmu
 
     # Przygotowanie do naniesienia procesów na oś czasu
     t=-1
     completed=0
 
-    # Pętla nanosząca procesy na oś czasu
-    for i in range(len(timeline)):
+    for i in range(len(timeline)):  # Pętla nanosząca procesy na oś czasu
         t+=1
         if t<processes[0][1]:   # jeżeli proces jeszcze nie dotarł, czekamy na niego - nanosimy pid 0
             continue
@@ -53,11 +49,9 @@ def cpu_do_fifo(processes):
     avg_ta=round(ta_total/len(processes_info),2)
     avg_w=round(w_total/len(processes_info),2)
 
-    # Wyświetlanie średnich
-    print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w))
+    print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
 
-    # Wyświetlanie osi czasu
-    print("\n0",timeline,max_time)
+    print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
 
 # Gdyby ktoś przypadkiem uruchomił ten plik
 if __name__ == '__main__':
