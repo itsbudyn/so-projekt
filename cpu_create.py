@@ -13,14 +13,12 @@ def create_processes():
     except ValueError:
         invalid_process_err("Jedna z wartości nie była liczbą całkowitą (int)!")
 
-    for i in arriv_times:
-        if i<0: invalid_process_err("Błąd: Co najmniej jeden z procesów miał czas przybycia mniejszy od 0!")
-
-    for i in burst_times:
-        if i<=0: invalid_process_err("Błąd: Co najmniej jeden z procesów miał czas wykonaia mniejszy bądź równy 0!")
-
     if len(burst_times) != len(arriv_times):
         invalid_process_err("Długości tablic nie są takie same!")
+
+    for i in len(burst_times):
+        if arriv_times[i]<0: invalid_process_err("Błąd: Co najmniej jeden z procesów miał czas przybycia mniejszy od 0!")
+        if burst_times[i]<=0: invalid_process_err("Błąd: Co najmniej jeden z procesów miał czas wykonaia mniejszy bądź równy 0!")
 
     for i in range(len(burst_times)):
         # PID , arrival , burst , Exit , TurnAround, Wait
