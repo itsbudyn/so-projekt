@@ -20,7 +20,7 @@ while True:
     print( 
 """MENU GŁÓWNE
 ALGORYTMY CZASÓW PROCESORA
-    1. FIFO
+    1. FCFS / FIFO
     2. SJF - NIEWYWŁASZCZENIOWY
 
 ALBORYTMY ZASTĘPOWANIA STRON
@@ -33,7 +33,7 @@ ALBORYTMY ZASTĘPOWANIA STRON
         choice=int(input("Proszę wybrać opcję: "))  # Pobieranie wyboru od użytkownika
     except:
         choice=9
-        
+
     clearscr()      # Czyszczenie ekranu
     match choice:   # Wybieranie obcji na podstawie podanej wartości
         case 1:
