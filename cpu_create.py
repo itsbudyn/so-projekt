@@ -4,8 +4,8 @@ from keywords import *
 def create_processes():
     processes=[]    # tworzenie nowej tabeli, gdzie będą dodane procesy
     try:
-        arriv_times=list(map(int,str(input("Podaj czasy przybycia dla procesów: ")).split(" ")))        # Pobieranie czasów przybycia
-        burst_times=list(map(int,str(input("Podaj czasy wykonywania dla procesów: ")).split(" ")))      # Pobieranie czasów wykonywania
+        arriv_times=list(map(int,str(input("Podaj czasy przybycia dla procesów:\t")).split(" ")))        # Pobieranie czasów przybycia
+        burst_times=list(map(int,str(input("Podaj czasy wykonywania dla procesów:\t")).split(" ")))      # Pobieranie czasów wykonywania
     except ValueError:
         exit_err("Jedna z wartości nie była liczbą całkowitą (int)!")   # Obsługa wyjątku ValueError - kiedy zostanie podane coś innego niż int
 
