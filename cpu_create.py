@@ -7,8 +7,11 @@ def invalid_process_err(msg:str):
 
 def create_processes():
     processes=[]
-    arriv_times=list(map(int,str(input("Podaj czasy przybycia dla procesów: ")).split(" ")))
-    burst_times=list(map(int,str(input("Podaj czasy wykonywania dla procesów: ")).split(" ")))
+    try:
+        arriv_times=list(map(int,str(input("Podaj czasy przybycia dla procesów: ")).split(" ")))
+        burst_times=list(map(int,str(input("Podaj czasy wykonywania dla procesów: ")).split(" ")))
+    except ValueError:
+        invalid_process_err("Jedna z wartości nie była liczbą całkowitą (int)!")
 
     for i in arriv_times:
         if i<0: invalid_process_err("Błąd: Co najmniej jeden z procesów miał czas przybycia mniejszy od 0!")
