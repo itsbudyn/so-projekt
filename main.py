@@ -2,13 +2,14 @@ from cpu_create import create_processes
 from mem_create import create_calls, create_frames
 from cpu_fifo import cpu_do_fifo
 from cpu_sjf import cpu_do_sjf
-from sys import exit
-import os
 
 from mem_fifo import mem_do_fifo
 
+from keywords import clearscr
+from sys import exit
+
 while True:
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clearscr()
     print( 
 """MENU GŁÓWNE
 ALGORYTMY CZASÓW PROCESORA
@@ -22,6 +23,7 @@ ALBORYTMY ZASTĘPOWANIA STRON
 0. WYJŚCIE
 """)
     choice=int(input("Proszę wybrać opcję: "))
+    clearscr()
     match choice:
         case 1:
             processes=create_processes()
