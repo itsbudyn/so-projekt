@@ -1,6 +1,6 @@
 from keywords import exit_err
 
-def create_pages():
+def create_calls():
     page_calls=[]
     try:
         page_calls=list(map(int,str(input("Podaj odwołania: ")).split(" ")))

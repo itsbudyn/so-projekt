@@ -3,7 +3,7 @@
 from sys import exit
 from keywords import *
 
-def do_fifo(processes):
+def cpu_do_fifo(processes):
     # Sortowanie procesów po czasie przybycia
     processes=sorted(processes, key=lambda x: x[ARRIVAL])
     

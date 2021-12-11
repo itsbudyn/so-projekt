@@ -3,7 +3,7 @@
 from sys import exit
 from keywords import *
 
-def do_sjf(processes):
+def cpu_do_sjf(processes):
     # Sortowanie procesów po czasie przybycia
     processes=sorted(processes, key=lambda x: x[ARRIVAL])
     
