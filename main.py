@@ -29,7 +29,11 @@ ALBORYTMY ZASTĘPOWANIA STRON
 
 0. WYJŚCIE
 """)
-    choice=int(input("Proszę wybrać opcję: "))  # Pobieranie wyboru od użytkownika
+    try:
+        choice=int(input("Proszę wybrać opcję: "))  # Pobieranie wyboru od użytkownika
+    except:
+        choice=9
+        
     clearscr()      # Czyszczenie ekranu
     match choice:   # Wybieranie obcji na podstawie podanej wartości
         case 1:
