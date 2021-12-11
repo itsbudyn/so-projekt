@@ -1,9 +1,4 @@
-from sys import exit
 from keywords import *
-
-def invalid_process_err(msg:str):
-    print("Błąd:",msg)
-    exit(-1)
 
 def create_processes():
     processes=[]
@@ -11,14 +6,14 @@ def create_processes():
         arriv_times=list(map(int,str(input("Podaj czasy przybycia dla procesów: ")).split(" ")))
         burst_times=list(map(int,str(input("Podaj czasy wykonywania dla procesów: ")).split(" ")))
     except ValueError:
-        invalid_process_err("Jedna z wartości nie była liczbą całkowitą (int)!")
+        exit_err("Jedna z wartości nie była liczbą całkowitą (int)!")
 
     if len(burst_times) != len(arriv_times):
-        invalid_process_err("Długości tablic nie są takie same!")
+        exit_err("Długości tablic nie są takie same!")
 
     for i in len(burst_times):
-        if arriv_times[i]<0: invalid_process_err("Co najmniej jeden z procesów miał czas przybycia mniejszy od 0!")
-        if burst_times[i]<=0: invalid_process_err("Co najmniej jeden z procesów miał czas wykonaia mniejszy bądź równy 0!")
+        if arriv_times[i]<0: exit_err("Co najmniej jeden z procesów miał czas przybycia mniejszy od 0!")
+        if burst_times[i]<=0: exit_err("Co najmniej jeden z procesów miał czas wykonaia mniejszy bądź równy 0!")
 
     for i in range(len(burst_times)):
         # PID , arrival , burst , Exit , TurnAround, Wait
