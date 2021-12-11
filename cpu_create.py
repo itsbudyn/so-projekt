@@ -12,13 +12,13 @@ def create_processes():
     if len(burst_times) != len(arriv_times):    # Zakończ działanie programu, jeżeli ilość czasów przybycia będzie rózna od ilości czasów wykonywania
         exit_err("Długości tablic nie są takie same!")
 
-    for i in len(burst_times):  # Zakończ działanie programu, jeżeli zostanie podana gdzieś nieprawidłowa wartość
+    for i in range(len(burst_times)):  # Zakończ działanie programu, jeżeli zostanie podana gdzieś nieprawidłowa wartość
         if arriv_times[i]<0: exit_err("Co najmniej jeden z procesów miał czas przybycia mniejszy od 0!")
         if burst_times[i]<=0: exit_err("Co najmniej jeden z procesów miał czas wykonaia mniejszy bądź równy 0!")
 
     # Dodawanie procesów do tablicy
     for i in range(len(burst_times)):
-        # PID , arrival , burst , Exit , TurnAround, Wait
+        # PID , Arrival , Burst , Exit , TurnAround, Wait
         process=[0,0,0,0,0,0,0]             # Tworzenie pustego procesu
         process[PID]=i+1                    # Nadawanie PID-u
         process[ARRIVAL]=arriv_times[i]     # Nadawanie czasu przybycia
@@ -27,6 +27,6 @@ def create_processes():
         processes.append(process)           # Dodawanie procesu do tabeli
     return processes        # Koniec funkcji - zwracanie tabeli
 
-# gdyby ktoś przypadkiem uruchomił ten plik
+# Gdyby ktoś przypadkiem uruchomił ten plik
 if __name__ == "__main__":
     print("Proszę uruchomić plik main.py")
