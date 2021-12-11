@@ -2,25 +2,18 @@
 from keywords import *
 
 def cpu_do_sjf(processes):
-    # Sortowanie procesów po czasie przybycia
-    processes=sorted(processes, key=lambda x: x[ARRIVAL])
-    
-    # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
-    processes_info=processes[:]
+    processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 
     # Obliczanie czasu wykonywania algorytmu
     max_time=0
     for i in processes:
         max_time+=i[2]
 
-    # Budowa osi czasu na podstawie czasu wykonywania algorytmu
-    timeline=[0 for i in range(max_time)]
+    timeline=[0 for i in range(max_time)]   # Budowa osi czasu na podstawie czasu wykonywania algorytmu
 
-    # Przygotowanie do naniesienia procesów na oś czasu
-    t=-1
+    t=-1    # Przygotowanie do naniesienia procesów na oś czasu
 
-    # Pętla nanosząca procesy na oś czasu
-    for i in range(len(timeline)):
+    for i in range(len(timeline)):  # Pętla nanosząca procesy na oś czasu
         t+=1
         p_queue=[]              # Kolejka procesów, gdzie będą sortowane po burst time
         for i in processes:
@@ -60,11 +53,9 @@ def cpu_do_sjf(processes):
     avg_ta=round(ta_total/len(processes_info),2)
     avg_w=round(w_total/len(processes_info),2)
 
-    # Wyświetlanie średnich
-    print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w))
+    print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
 
-    # Wyświetlanie osi czasu
-    print("\n0",timeline,max_time)
+    print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
 
 # Gdyby ktoś przypadkiem uruchomił ten plik
 if __name__ == '__main__':
