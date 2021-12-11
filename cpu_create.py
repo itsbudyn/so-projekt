@@ -2,7 +2,7 @@ from sys import exit
 from keywords import *
 
 def invalid_process_err(msg:str):
-    print(msg)
+    print("Błąd:",msg)
     exit(-1)
 
 def create_processes():
@@ -17,8 +17,8 @@ def create_processes():
         invalid_process_err("Długości tablic nie są takie same!")
 
     for i in len(burst_times):
-        if arriv_times[i]<0: invalid_process_err("Błąd: Co najmniej jeden z procesów miał czas przybycia mniejszy od 0!")
-        if burst_times[i]<=0: invalid_process_err("Błąd: Co najmniej jeden z procesów miał czas wykonaia mniejszy bądź równy 0!")
+        if arriv_times[i]<0: invalid_process_err("Co najmniej jeden z procesów miał czas przybycia mniejszy od 0!")
+        if burst_times[i]<=0: invalid_process_err("Co najmniej jeden z procesów miał czas wykonaia mniejszy bądź równy 0!")
 
     for i in range(len(burst_times)):
         # PID , arrival , burst , Exit , TurnAround, Wait
