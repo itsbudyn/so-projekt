@@ -1,4 +1,4 @@
-# algorytm czasu procesora FIFO
+# Algorytm czasu procesora FIFO
 from keywords import *
 
 def cpu_do_fifo(processes):
@@ -33,7 +33,7 @@ def cpu_do_fifo(processes):
                 processes_info[completed][EXIT]=t+1     # Wpisanie czasu zakończenia procesu
                 processes_info[completed][TURNAROUND]=processes_info[completed][EXIT]-processes_info[completed][ARRIVAL]    # Wpisanie czasu turnaround (od przybycia do zakończenia)
                 processes_info[completed][WAIT]=processes_info[completed][TURNAROUND]-processes_info[completed][BURST]      # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
-                completed+=1    # aby w tablicy processes_info było wiadomo na którym wpisie pracujemy
+                completed+=1    # Aby w tablicy processes_info było wiadomo na którym wpisie pracujemy
 
     # Część z tabelą
     print("PID\tArrv.\tBurst\tExit\tTA\tWait")
@@ -42,11 +42,11 @@ def cpu_do_fifo(processes):
     ta_total=0
     w_total=0
     for i in processes_info:
-        # czasy będą sumowane podczas wyświetlania tabeli
+        # Czasy będą sumowane podczas wyświetlania tabeli
         ta_total+=i[TURNAROUND]     # Sumowanie czasów turnaround
         w_total+=i[WAIT]            # Sumowanie czasów oczekiwania
         for j in range(len(i)):     # Wyświetlanie tabeli
-            if j!=REMAINING: print(i[j],end="\t")   # warunek if aby nie wyświetlać pozostałego czasu - wiadomo, że wynosi on 0
+            if j!=REMAINING: print(i[j],end="\t")   # Warunek if aby nie wyświetlać pozostałego czasu - wiadomo, że wynosi on 0
         print("")
 
     # Obliczanie średnich
@@ -59,6 +59,6 @@ def cpu_do_fifo(processes):
     # Wyświetlanie osi czasu
     print("\n0",timeline,max_time)
 
-# gdyby ktoś przypadkiem uruchomił ten plik
+# Gdyby ktoś przypadkiem uruchomił ten plik
 if __name__ == '__main__':
     print("Proszę uruchomić plik main.py")

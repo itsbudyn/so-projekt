@@ -1,15 +1,21 @@
+# Moduły do tworzenia danych wejściowych
 from cpu_create import create_processes
 from mem_create import create_calls, create_frames
+
+# Moduły do algorytmów czasu procesora
 from cpu_fifo import cpu_do_fifo
 from cpu_sjf import cpu_do_sjf
 
+# Moduły do algorytmów zastępowania stron
 from mem_fifo import mem_do_fifo
 
+# Pozostałe moduły
 from keywords import clearscr
 from sys import exit
 
+# Menu główne programu
 while True:
-    clearscr()
+    clearscr()  # Czyszczenie okna terminala
     print( 
 """MENU GŁÓWNE
 ALGORYTMY CZASÓW PROCESORA
@@ -22,9 +28,9 @@ ALBORYTMY ZASTĘPOWANIA STRON
 
 0. WYJŚCIE
 """)
-    choice=int(input("Proszę wybrać opcję: "))
-    clearscr()
-    match choice:
+    choice=int(input("Proszę wybrać opcję: "))  # Pobieranie wyboru od użytkownika
+    clearscr()      # Czyszczenie ekranu
+    match choice:   # Wybieranie obcji na podstawie podanej wartości
         case 1:
             processes=create_processes()
             cpu_do_fifo(processes)
@@ -37,6 +43,6 @@ ALBORYTMY ZASTĘPOWANIA STRON
             mem_do_fifo(frames,calls)
         case 4:
             pass
-        case 0:
-            exit(0)
-    input("Aby kontynuować, naciśnij enter... ")
+        case 0: exit(0)
+        case default: print("Nie rozpoznano opcji!")
+    input("Aby kontynuować, naciśnij enter... ")    # Po zakończeniu funkcji wstrzymuje program
