@@ -8,6 +8,7 @@ from cpu_sjf import cpu_do_sjf
 
 # Moduły do algorytmów zastępowania stron
 from mem_fifo import mem_do_fifo
+from mem_lfu import mem_do_lfu
 
 # Pozostałe moduły
 from keywords import clearscr
@@ -42,7 +43,9 @@ ALBORYTMY ZASTĘPOWANIA STRON
             frames=create_frames()
             mem_do_fifo(frames,calls)
         case 4:
-            pass
+            calls=create_calls()
+            frames=create_frames()
+            mem_do_lfu(frames,calls)
         case 0: exit(0)
         case default: print("Nie rozpoznano opcji!")
     input("Aby kontynuować, naciśnij enter... ")    # Po zakończeniu funkcji wstrzymuje program
