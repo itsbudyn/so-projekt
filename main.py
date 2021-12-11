@@ -8,8 +8,13 @@ while True:
     os.system('cls' if os.name == 'nt' else 'clear')
     print( 
 """MENU GŁÓWNE
-1. FIFO
-2. SJF - NIEWYWŁASZCZENIOWY
+ALGORYTMY CZASÓW PROCESORA
+    1. FIFO
+    2. SJF - NIEWYWŁASZCZENIOWY
+
+ALBORYTMY ZASTĘPOWANIA STRON
+    3. FIFO - BEZ MODYFIKACJI
+    4. LFU
 
 0. WYJŚCIE
 """)
