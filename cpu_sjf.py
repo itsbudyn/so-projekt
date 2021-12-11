@@ -1,6 +1,4 @@
 # algorytm czasu procesora FIFO
-
-from sys import exit
 from keywords import *
 
 def cpu_do_sjf(processes):
