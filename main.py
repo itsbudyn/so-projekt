@@ -1,21 +1,13 @@
-# Moduły do tworzenia danych wejściowych
-from cpu_create import create_processes
+from cpu_create import create_processes             # Moduły do tworzenia danych wejściowych
 from mem_create import create_calls, create_frames
-
-# Moduły do algorytmów czasu procesora
-from cpu_fifo import cpu_do_fifo
+from cpu_fifo import cpu_do_fifo                    # Moduły do algorytmów czasu procesora
 from cpu_sjf import cpu_do_sjf
-
-# Moduły do algorytmów zastępowania stron
-from mem_fifo import mem_do_fifo
+from mem_fifo import mem_do_fifo                    # Moduły do algorytmów zastępowania stron
 from mem_lfu import mem_do_lfu
-
-# Pozostałe moduły
-from keywords import clearscr
+from keywords import clearscr                       # Pozostałe moduły
 from sys import exit
 
-# Menu główne programu
-while True:
+while True:     # Menu główne programu
     clearscr()  # Czyszczenie okna terminala
     print( 
 """MENU GŁÓWNE
@@ -36,20 +28,10 @@ ALBORYTMY ZASTĘPOWANIA STRON
 
     clearscr()      # Czyszczenie ekranu
     match choice:   # Wybieranie obcji na podstawie podanej wartości
-        case 1:
-            processes=create_processes()
-            cpu_do_fifo(processes)
-        case 2:
-            processes=create_processes()
-            cpu_do_sjf(processes)
-        case 3:
-            calls=create_calls()
-            frames=create_frames()
-            mem_do_fifo(frames,calls)
-        case 4:
-            calls=create_calls()
-            frames=create_frames()
-            mem_do_lfu(frames,calls)
+        case 1: cpu_do_fifo(create_processes())
+        case 2: cpu_do_sjf(create_processes())
+        case 3: mem_do_fifo(create_frames(),create_calls())
+        case 4: mem_do_lfu(create_frames(),create_calls())
         case 0: exit(0)
         case default: print("Nie rozpoznano opcji!")
     input("Aby kontynuować, naciśnij enter... ")    # Po zakończeniu funkcji wstrzymuje program
