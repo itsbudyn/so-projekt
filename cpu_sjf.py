@@ -23,10 +23,10 @@ def cpu_do_sjf(processes):
             continue
         else:
             p_queue=sorted(p_queue, key=lambda x: x[BURST])     # Sortowanie procesów w kolejce po czasie wykonania
-            pos_info=p_queue[0][PID]-1          # Uzyskiwanie pozycji procesu w tabeli processes_info
-            pos=processes.index(p_queue[0])     # Uzyskiwanie pozycji procesu w tabeli processes - różnica pomiędzy tą a poprzednią tabelą jest taka, że z tamtej usuwamy procesy
+            pos_info=p_queue[0][PID]-1              # Uzyskiwanie pozycji procesu w tabeli processes_info
+            pos=processes.index(p_queue[0])         # Uzyskiwanie pozycji procesu w tabeli processes - różnica pomiędzy tą a poprzednią tabelą jest taka, że z tamtej usuwamy procesy
 
-            timeline[t]=p_queue[0][PID]         # Nanoszenie PID-u procesu na oś czasu
+            timeline[t]=p_queue[0][PID]             # Nanoszenie PID-u procesu na oś czasu
 
             processes[pos][REMAINING]-=1            # Zbijanie pozostałego czasu wykonywania procesu o 1
             if p_queue[0][REMAINING]==0:            # Jeżeli czas procesu się skończył
@@ -57,6 +57,5 @@ def cpu_do_sjf(processes):
 
     print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
 
-# Gdyby ktoś przypadkiem uruchomił ten plik
-if __name__ == '__main__':
+if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")

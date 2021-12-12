@@ -1,7 +1,7 @@
 # Algorytm zastępowania stron FIFO
 
 def frames_repr(frames:int,frames_arr): # Funkcja do wyświetlania stanu ramek
-    frames_repr=""  # Tworzenie pustego stringa
+    frames_repr=""
     for j in range(frames): # Iteracja przez ramki
         try:
             frames_repr+=str(frames_arr[j]) # Jeżeli ta ramka jest zajęta, to istnieje w tabeli, i dopisujemy do stringa wskazywaną wartość
@@ -11,8 +11,8 @@ def frames_repr(frames:int,frames_arr): # Funkcja do wyświetlania stanu ramek
     return frames_repr  # Zwrot stringa
 
 
-def mem_do_fifo(frames:int,calls):
-    frames_arr=[]   # Tworzenie pustej tabeli stron
+def mem_do_fifo(frames:int,calls):  # Tworzenie tabeli stron
+    frames_arr=[]
 
     print("Krok","Ramki\t","Wym.","Jest",sep="\t")  # Tworzenie pierwszej linijki tabeli z nazwami kolumn
 
@@ -26,6 +26,5 @@ def mem_do_fifo(frames:int,calls):
 
     print("END","\t│ ",frames_repr(frames,frames_arr)," │",sep="\0")    # Wypisywanie ostatecznego stanu ramek
 
-# Gdyby ktoś przypadkiem uruchomił ten plik
-if __name__ == '__main__':
+if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")

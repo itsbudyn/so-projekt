@@ -27,6 +27,5 @@ def create_processes():
         processes.append(process)           # Dodawanie procesu do tabeli
     return processes        # Koniec funkcji - zwracanie tabeli
 
-# Gdyby ktoś przypadkiem uruchomił ten plik
-if __name__ == "__main__":
+if __name__ == "__main__":  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")

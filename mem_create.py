@@ -1,8 +1,8 @@
 # Moduł pomagający w tworzeniu tablicy ramek
 from keywords import exit_err
 
-def create_calls():
-    page_calls=[]   # Tworzenie pustej tablicy odwołań
+def create_calls():     # Tworzenie tablicy odwołań
+    page_calls=[]
     try:
         page_calls=list(map(int,str(input("Podaj odwołania: ")).split(" ")))    # Dzielenie podanych wartości przez spacje i wpisywanie ich jako int
     except ValueError:  # W przypadku wartości innej niż int
@@ -19,6 +19,5 @@ def create_frames():    # Pobieranie wartości liczbowej, która mówi na ilu ra
     if frames<=0: exit_err("Wartość nie może być mniejsza od zera!")     # Zakończenie programu w przypadku podania wartości mniejszej bądź równej 0
     return frames
 
-# Gdyby ktoś przypadkiem uruchomił ten plik
-if __name__ == "__main__":
+if __name__ == "__main__":  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")

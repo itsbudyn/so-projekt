@@ -20,12 +20,12 @@ def get_pid_freq(pid:int,freq_arr): # Funkcja do otrzymywania wartości, ile raz
     return pid_freq
 
 def frames_repr(frames:int,frames_arr,freq): # Funkcja do wyświetlania stanu ramek
-    frames_repr=""  # Tworzenie pustego stringa
+    frames_repr=""
     for j in range(frames): # Iteracja przez ramki
         try:
             frames_repr+=str("{} ({})".format(frames_arr[j],get_pid_freq(frames_arr[j],freq))) # Jeżeli ta ramka jest zajęta, to istnieje w tabeli, i dopisujemy do stringa wskazywaną wartość
         except IndexError:                  # Jeżeli nic nie jest wpisane do ramki, w tym miejscu dostaniemy IndexError - zamist kończyć działanie programu, wypiszemy co innego
-            frames_repr+="_____"            # W przypadku, kiedy ramka jest wolna
+            frames_repr+="_____"
         if j!=frames-1: frames_repr+=" "    # Dopisywanie znaku spacji między wartościami
     return frames_repr  # Zwrot stringa
 
@@ -65,6 +65,5 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
 
     print("END","\t│ ",frames_repr(frames,frames_arr,freq_arr)," │",sep="\0")    # Wypisywanie ostatecznego stanu ramek
 
-# Gdyby ktoś przypadkiem uruchomił ten plik
-if __name__ == '__main__':
+if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")

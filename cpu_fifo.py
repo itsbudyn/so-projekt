@@ -53,6 +53,5 @@ def cpu_do_fifo(processes):
 
     print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
 
-# Gdyby ktoś przypadkiem uruchomił ten plik
-if __name__ == '__main__':
+if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")

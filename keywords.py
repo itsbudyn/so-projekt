@@ -9,16 +9,13 @@ TURNAROUND  = 4
 WAIT        = 5
 REMAINING   = 6
 
-# Funkcja kończąca działanie programu, która też drukuję wiadomość
-# odpowiednią do błędu, jaki popełnił użytkownik
+# Funkcja kończąca działanie programu, która też drukuje wiadomość odpowiednią do błędu, jaki popełnił użytkownik
 def exit_err(msg:str):
     print("Błąd:",msg)
     exit(-1)
 
-# Funkcja czyszcząca okno terminalu, działająca na Windowsie i POSIX
-def clearscr():
+def clearscr(): # Funkcja czyszcząca okno terminalu, działająca na Windowsie i POSIX
     os.system('cls' if os.name == 'nt' else 'clear')
 
-# Gdyby ktoś przypadkiem uruchomił ten plik
-if __name__ == "__main__":
+if __name__ == "__main__":  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")
