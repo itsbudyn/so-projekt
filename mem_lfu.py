@@ -33,6 +33,7 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
     frames_arr=[]       # Tworzenie tabeli stron
     freq_arr=[]         # Tworzenie tabeli zliczającej ilość użyć danej strony
     different_pages=[]  # Tworzenie tymczasowej tabeli ze wszystkimi PID-ami stron
+    swaps=0
 
     for i in calls:     # Przygotowanie tablicy używalności stron
         if i not in different_pages:    # Aby każdy wpis miał unikalny PID
@@ -43,7 +44,7 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
 
     del different_pages # Tabela już nie jest nam potrzebna
 
-    print("Krok","Ramki\t","Wym.","Jest",sep="\t")  # Tworzenie pierwszej linijki tabeli z nazwami kolumn
+    print("Krok","Ramki\t\t","Wym.","Jest",sep="\t")  # Tworzenie pierwszej linijki tabeli z nazwami kolumn
 
     for i in range(len(calls)): # Iteracja przez odwołania
         print(i+1,"\t│ ",frames_repr(frames,frames_arr,freq_arr)," │\t",calls[i],"\t",calls[i] in frames_arr,sep="\0")   # Wypisywanie linijki zawierająca: Krok, staan ramek, Następne odwołanie, Czy następne odwołanie znajduje się w ramce
@@ -56,6 +57,7 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
                     freq_t.append(proc_t)               # ... który zostanie wpisany do tymczasowej tabeli
                 least_used_pid=get_least_used_pid(freq_t)   # Znalezienie najrzadziej używanego PID-u
                 frames_arr[frames_arr.index(least_used_pid)]=calls[i]   # Zastąpienie najrzadziej używanej strony
+                swaps+=1    # Inkrementacja licznika zastąpień
             else: frames_arr.append(calls[i])   # Jeżeli są wolne ramki, dopisujemy na koniec tabeli
 
         for j in range(len(freq_arr)):      # Zwiększenie licznika użyć o 1
@@ -64,6 +66,18 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
                 break
 
     print("END","\t│ ",frames_repr(frames,frames_arr,freq_arr)," │",sep="\0")    # Wypisywanie ostatecznego stanu ramek
+    print("Zastąpień stron:",swaps,"\n")     # Wyświetlanie ilości zastąpień
+
+    freq_arr=sorted(freq_arr, key=lambda x: x[PID])     # Sortowanie tablicy częstotliwości po PID-zie
+
+    #   Wyświetlenie tabeli częstotliwości użycia stron
+    print("PID:\t\t",end="\0")
+    for i in freq_arr:
+        print(i[PID],end="\t")
+    print("\nZASTĄPIEŃ:\t",end="\0")
+    for i in freq_arr:
+        print(i[FREQ],end="\t")
+    print("")
 
 if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")
