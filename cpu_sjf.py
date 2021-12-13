@@ -19,9 +19,7 @@ def cpu_do_sjf(processes):
         for i in processes:
             if i[ARRIVAL] <= t: p_queue.append(i)   # Dodawanie procesów, które przybyły
 
-        if len(p_queue)==0:     # Jeżeli żaden proces nie przybył
-            continue
-        else:
+        if len(p_queue)>0:     # Jeżeli jest proces w kolejce - przybył
             p_queue=sorted(p_queue, key=lambda x: x[BURST])     # Sortowanie procesów w kolejce po czasie wykonania
             pos_info=p_queue[0][PID]-1              # Uzyskiwanie pozycji procesu w tabeli processes_info
             pos=processes.index(p_queue[0])         # Uzyskiwanie pozycji procesu w tabeli processes - różnica pomiędzy tą a poprzednią tabelą jest taka, że z tamtej usuwamy procesy
@@ -35,27 +33,7 @@ def cpu_do_sjf(processes):
                 processes_info[pos_info][TURNAROUND]=processes_info[pos_info][EXIT]-processes_info[pos_info][ARRIVAL]   # Wpisanie czasu turnaround (od przybycia do zakończenia)
                 processes_info[pos_info][WAIT]=processes_info[pos_info][TURNAROUND]-processes_info[pos_info][BURST]     # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
                 
-    # Część z tabelą
-    print("PID\tArrv.\tBurst\tExit\tTA\tWait")
-
-    # Liczenie średniej i wyświetlenie tabeli
-    ta_total=0
-    w_total=0
-    for i in processes_info:
-        # Czasy będą sumowane podczas wyświetlania tabeli
-        ta_total+=i[TURNAROUND]     # Sumowanie czasów turnaround
-        w_total+=i[WAIT]            # Sumowanie czasów oczekiwania
-        for j in range(len(i)):     # Wyświetlanie tabeli
-            if j!=REMAINING: print(i[j],end="\t")   # Warunek if aby nie wyświetlać pozostałego czasu - wiadomo, że wynosi on 0
-        print("")
-
-    # Obliczanie średnich
-    avg_ta=round(ta_total/len(processes_info),2)
-    avg_w=round(w_total/len(processes_info),2)
-
-    print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
-
-    print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
+    process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
 
 if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")

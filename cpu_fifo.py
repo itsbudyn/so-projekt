@@ -19,10 +19,8 @@ def cpu_do_fifo(processes):
 
     for i in range(len(timeline)):  # Pętla nanosząca procesy na oś czasu
         t+=1
-        if t<processes[0][1]:   # jeżeli proces jeszcze nie dotarł, czekamy na niego - nanosimy pid 0
-            continue
-        else:
-            timeline[t]=processes[0][PID]       # wpisanie na pozycji osi czasu PID-u procesu
+        if t>=processes[0][1]:   # Jeżeli proces dotarł - czas na osi czasu jesst większy bądź równy czasu przybycia
+            timeline[t]=processes[0][PID]       # Wpisanie na pozycji osi czasu PID-u procesu
             processes[0][REMAINING]-=1          # Zbicie pozostałego czasu o 1 jednostkę
             if processes[0][REMAINING]==0:      # Jeżeli proces się zakończył
                 del processes[0]                # Usuń go z kolejki
@@ -30,28 +28,8 @@ def cpu_do_fifo(processes):
                 processes_info[completed][TURNAROUND]=processes_info[completed][EXIT]-processes_info[completed][ARRIVAL]    # Wpisanie czasu turnaround (od przybycia do zakończenia)
                 processes_info[completed][WAIT]=processes_info[completed][TURNAROUND]-processes_info[completed][BURST]      # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
                 completed+=1    # Aby w tablicy processes_info było wiadomo na którym wpisie pracujemy
-
-    # Część z tabelą
-    print("PID\tArrv.\tBurst\tExit\tTA\tWait")
-
-    # Liczenie średniej i wyświetlenie tabeli
-    ta_total=0
-    w_total=0
-    for i in processes_info:
-        # Czasy będą sumowane podczas wyświetlania tabeli
-        ta_total+=i[TURNAROUND]     # Sumowanie czasów turnaround
-        w_total+=i[WAIT]            # Sumowanie czasów oczekiwania
-        for j in range(len(i)):     # Wyświetlanie tabeli
-            if j!=REMAINING: print(i[j],end="\t")   # Warunek if aby nie wyświetlać pozostałego czasu - wiadomo, że wynosi on 0
-        print("")
-
-    # Obliczanie średnich
-    avg_ta=round(ta_total/len(processes_info),2)
-    avg_w=round(w_total/len(processes_info),2)
-
-    print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
-
-    print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
+            
+    process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
 
 if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")
