@@ -6,11 +6,10 @@ def cpu_do_sjf(processes):
 
     # Obliczanie czasu wykonywania algorytmu
     max_time=0
-    for i in processes:
-        max_time+=i[2]
+    for i in processes: max_time+=i[2]
 
     timeline=[0 for i in range(max_time)]   # Budowa osi czasu na podstawie czasu wykonywania algorytmu
-
+    
     t=-1    # Przygotowanie do naniesienia procesów na oś czasu
 
     for i in range(len(timeline)):  # Pętla nanosząca procesy na oś czasu
@@ -35,5 +34,4 @@ def cpu_do_sjf(processes):
                 
     process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
 
-if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
-    print("Proszę uruchomić plik main.py")
+if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik

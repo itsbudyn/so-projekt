@@ -14,8 +14,7 @@ def exit_err(msg:str):
     print("Błąd:",msg)
     exit(-1)
 
-def clearscr(): # Funkcja czyszcząca okno terminalu, działająca na Windowsie i POSIX
-    os.system('cls' if os.name == 'nt' else 'clear')
+def clearscr(): os.system('cls' if os.name == 'nt' else 'clear')    # Funkcja czyszcząca okno terminalu, działająca na Windowsie i POSIX
 
 def process_table(processes_info,timeline,max_time):    # Część z tabelą
     print("PID\tArrv.\tBurst\tExit\tTA\tWait")
@@ -36,8 +35,6 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą
     avg_w=round(w_total/len(processes_info),2)
 
     print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
-
     print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
 
-if __name__ == "__main__":  # Gdyby ktoś przypadkiem uruchomił ten plik
-    print("Proszę uruchomić plik main.py")
+if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
