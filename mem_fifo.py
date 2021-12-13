@@ -13,6 +13,7 @@ def frames_repr(frames:int,frames_arr): # Funkcja do wyświetlania stanu ramek
 
 def mem_do_fifo(frames:int,calls):  # Tworzenie tabeli stron
     frames_arr=[]
+    swaps=0     # licznik zastąpień stron
 
     print("Krok","Ramki\t","Wym.","Jest",sep="\t")  # Tworzenie pierwszej linijki tabeli z nazwami kolumn
 
@@ -22,9 +23,11 @@ def mem_do_fifo(frames:int,calls):  # Tworzenie tabeli stron
         if calls[i] not in frames_arr:  # Jeżeli nie ma strony w żadnej z ramek
             if len(frames_arr)==frames: # Jeżeli wszystkie ramki są zajęte
                 del frames_arr[0]       # Usunięcie strony z pierwszej zajętej ramki
+                swaps+=1                # Inkrementacja licznika zastąpień
             frames_arr.append(calls[i]) # Dopisywanie strony do ostatniej, właśnie zwolnionej, ramki
 
     print("END","\t│ ",frames_repr(frames,frames_arr)," │",sep="\0")    # Wypisywanie ostatecznego stanu ramek
+    print("Zastąpień stron:",swaps)     # Wyświetlanie ilości zastąpień
 
 if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
     print("Proszę uruchomić plik main.py")
