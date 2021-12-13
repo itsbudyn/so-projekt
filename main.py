@@ -23,8 +23,8 @@ ALBORYTMY ZASTĘPOWANIA STRON
 """)
     try:
         choice=int(input("Proszę wybrać opcję: "))  # Pobieranie wyboru od użytkownika
-    except:
-        choice=9
+    except:     # W przypadku podania nielegalnej opcji
+        choice=9    
 
     clearscr()      # Czyszczenie ekranu
     match choice:   # Wybieranie obcji na podstawie podanej wartości
