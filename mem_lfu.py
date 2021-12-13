@@ -71,12 +71,10 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
     freq_arr=sorted(freq_arr, key=lambda x: x[PID])     # Sortowanie tablicy częstotliwości po PID-zie
 
     #   Wyświetlenie tabeli częstotliwości użycia stron
-    print("PID:\t\t",end="\0")
-    for i in freq_arr:
-        print(i[PID],end="\t")
-    print("\nZASTĄPIEŃ:\t",end="\0")
-    for i in freq_arr:
-        print(i[FREQ],end="\t")
+    print("PID:\t",end="\0")
+    for i in freq_arr: print(i[PID],end="\t")
+    print("\nUŻYĆ:\t",end="\0")
+    for i in freq_arr: print(i[FREQ],end="\t")
     print("")
 
 if __name__ == '__main__':  # Gdyby ktoś przypadkiem uruchomił ten plik
