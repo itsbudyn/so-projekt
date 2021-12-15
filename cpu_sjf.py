@@ -37,7 +37,7 @@ def cpu_do_sjf(processes):
             if currentproc[REMAINING]==0:   # Jeżeli proces zakończył swoją pracę
                 del processes[get_pid_pos(currentproc[PID],processes)]  # Usuwamy proces z pierwotnej tabeli procesów
                 del p_queue[get_pid_pos(currentproc[PID],p_queue)]      # Usuwamy proces z kolejki
-                pos=get_pid_pos(currentproc[PID],processes_info)    # Otrzymujemy pozycję procesu w tabeli processes_info
+                pos=get_pid_pos(currentproc[PID],processes_info)        # Otrzymujemy pozycję procesu w tabeli processes_info
                 processes_info[pos][EXIT]=t+1     # Wpisanie czasu zakończenia procesu
                 processes_info[pos][TURNAROUND]=processes_info[pos][EXIT]-processes_info[pos][ARRIVAL]    # Wpisanie czasu turnaround (od przybycia do zakończenia)
                 processes_info[pos][WAIT]=processes_info[pos][TURNAROUND]-processes_info[pos][BURST]      # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
