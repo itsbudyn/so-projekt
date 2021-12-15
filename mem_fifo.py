@@ -18,10 +18,10 @@ def mem_do_fifo(frames:int,calls):  # Tworzenie tabeli stron
         print(i+1,"\t│ ",frames_repr(frames,frames_arr)," │\t",calls[i],"\t",calls[i] in frames_arr,sep="\0")   # Wypisywanie linijki zawierająca: Krok, staan ramek, Następne odwołanie, Czy następne odwołanie znajduje się w ramce
 
         if calls[i] not in frames_arr:  # Jeżeli nie ma strony w żadnej z ramek
-            if len(frames_arr)==frames: # Jeżeli wszystkie ramki są zajęte
-                del frames_arr[0]       # Usunięcie strony z pierwszej zajętej ramki
-                swaps+=1                # Inkrementacja licznika zastąpień
-            frames_arr.append(calls[i]) # Dopisywanie strony do ostatniej, właśnie zwolnionej, ramki
+            if len(frames_arr)==frames:     # Jeżeli wszystkie ramki są zajęte
+                del frames_arr[0]           # Zwolnienie pierwszej zajętej ramki
+                swaps+=1                    # Inkrementacja licznika zastąpień
+            frames_arr.append(calls[i]) # Dopisywanie strony do pierwszej wolnej ramki
 
     print("END","\t│ ",frames_repr(frames,frames_arr)," │",sep="\0")    # Wypisywanie ostatecznego stanu ramek
     print("Zastąpień stron:",swaps)     # Wyświetlanie ilości zastąpień
