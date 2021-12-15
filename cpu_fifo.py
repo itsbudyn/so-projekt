@@ -27,6 +27,7 @@ def cpu_do_fifo(processes):
                 processes_info[completed][WAIT]=processes_info[completed][TURNAROUND]-processes_info[completed][BURST]      # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
                 completed+=1    # Aby w tablicy processes_info było wiadomo na którym wpisie pracujemy
             
-    process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
+    processes_info=sorted(processes_info, key=lambda x: x[PID]) # Sortowanie tabeli końcowej po PID-zie
+    process_table(processes_info,timeline,max_time)             # Wyświetlenie tabeli
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
