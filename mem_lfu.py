@@ -14,10 +14,8 @@ def get_least_used_pid(freqs_arr):  # Funkcja do otrzymywania PID-u strony najrz
     return min_pid
 
 def get_pid_freq(pid:int,freq_arr): # Funkcja do otrzymywania wartości, ile razy strona została użyta
-    pid_freq=0
     for i in freq_arr:
-        if i[PID]==pid: pid_freq=i[FREQ]
-    return pid_freq
+        if i[PID]==pid: return i[FREQ]
 
 def frames_repr(frames:int,frames_arr,freq): # Funkcja do wyświetlania stanu ramek
     frames_repr=""
