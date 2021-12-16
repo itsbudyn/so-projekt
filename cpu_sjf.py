@@ -9,7 +9,7 @@ def cpu_do_sjf(processes):
     processes=sorted(processes, key=lambda x: x[BURST])   # Sortowanie procesów po czasie wykonywania
     processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 
-    # Obliczanie czasu wykonywania algorytmu
+    # Obliczanie czasu wykonywania wszystkich procesów
     max_time=0
     for i in processes: max_time+=i[2]
 
@@ -23,13 +23,13 @@ def cpu_do_sjf(processes):
         t+=1
 
         sort_again=False        # Flaga do ponownego sortowania tablicy
-        for i in processes:     # Iteracja przez tablice procesów
-            if i not in p_queue and i[ARRIVAL] <= t:    # Jeżeli natkniemy się na proces, którego nie ma w kolejce, a przybył
-                p_queue.append(i)       # Dodajemy proces do końca tabeli
-                sort_again=True         # Ustawiamy flagę do ponownego sortowania
-
-        if sort_again: p_queue=sorted(p_queue, key=lambda x: x[BURST])  # Kiedy flaga do ponownego sortowania jest ustawiona - ponownie sortujemy kolejkę po burst time
-        if not currentproc: currentproc=p_queue[0]      # Jeżeli żaden proces nie jest obecny (albo pierwsze uruchomienie albo zakończenie poprzedniego), zostaje nim pierwszy proces w kolejce
+        if not currentproc:     # Jeżeli żaden proces nie jest obecny
+            for i in processes:     # Iteracja przez tablice procesów
+                if i not in p_queue and i[ARRIVAL] <= t:    # Jeżeli natkniemy się na proces, którego nie ma w kolejce, a czas przybycia minął (lub teraz jest)
+                    p_queue.append(i)       # Dodajemy proces do końca tabeli
+                    sort_again=True         # Ustawiamy flagę do ponownego sortowania
+            if sort_again: p_queue=sorted(p_queue, key=lambda x: x[BURST])  # Kiedy flaga do ponownego sortowania jest ustawiona - ponownie sortujemy kolejkę po burst time
+            currentproc=p_queue[0]      # Obecnym procesem zostaje pierwszy proces w kolejce
 
         if currentproc:     # Jeżeli mamy obecny proces
             timeline[t]=currentproc[PID]    # Nanosimy PID obecnego procesu na oś czasu
