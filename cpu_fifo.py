@@ -18,7 +18,6 @@ def cpu_do_fifo(processes):
     completed=0
 
     for i in range(len(timeline)):  # Pętla nanosząca procesy na oś czasu
-        print(timeline)
         t+=1
         if len(processes)==0: break
         if t>=processes[0][1]:   # Jeżeli proces dotarł - czas na osi czasu jesst większy bądź równy czasu przybycia
@@ -36,5 +35,6 @@ def cpu_do_fifo(processes):
 
     processes_info=sorted(processes_info, key=lambda x: x[PID]) # Sortowanie tabeli końcowej po PID-zie
     process_table(processes_info,timeline,max_time)             # Wyświetlenie tabeli
+    process_order(timeline)
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
