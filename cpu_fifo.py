@@ -7,7 +7,9 @@ def cpu_do_fifo(processes):
 
     # Obliczanie czasu wykonywania algorytmu
     max_time=0
-    for i in processes: max_time+=i[2]
+    for i in processes: 
+        max_time+=i[BURST]
+        max_time+=i[ARRIVAL]
 
     timeline=[0 for i in range(max_time)]   # Budowa osi czasu na podstawie czasu wykonywania algorytmu
 
@@ -16,7 +18,9 @@ def cpu_do_fifo(processes):
     completed=0
 
     for i in range(len(timeline)):  # Pętla nanosząca procesy na oś czasu
+        print(timeline)
         t+=1
+        if len(processes)==0: break
         if t>=processes[0][1]:   # Jeżeli proces dotarł - czas na osi czasu jesst większy bądź równy czasu przybycia
             timeline[t]=processes[0][PID]       # Wpisanie na pozycji osi czasu PID-u procesu
             processes[0][REMAINING]-=1          # Zbicie pozostałego czasu o 1 jednostkę
@@ -27,6 +31,9 @@ def cpu_do_fifo(processes):
                 processes_info[completed][WAIT]=processes_info[completed][TURNAROUND]-processes_info[completed][BURST]      # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
                 completed+=1    # Aby w tablicy processes_info było wiadomo na którym wpisie pracujemy
             
+    while timeline[-1]==0: del timeline[-1]
+    max_time=len(timeline)
+
     processes_info=sorted(processes_info, key=lambda x: x[PID]) # Sortowanie tabeli końcowej po PID-zie
     process_table(processes_info,timeline,max_time)             # Wyświetlenie tabeli
 

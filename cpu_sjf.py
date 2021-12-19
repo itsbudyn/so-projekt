@@ -11,7 +11,10 @@ def cpu_do_sjf(processes):
 
     # Obliczanie czasu wykonywania wszystkich procesów
     max_time=0
-    for i in processes: max_time+=i[2]
+    max_time=0
+    for i in processes: 
+        max_time+=i[BURST]
+        max_time+=i[ARRIVAL]
 
     timeline=[0 for i in range(max_time)]   # Budowa osi czasu na podstawie czasu wykonywania algorytmu
     
@@ -22,14 +25,16 @@ def cpu_do_sjf(processes):
     for i in range(len(timeline)):  # Pętla nanosząca procesy na oś czasu
         t+=1
 
+        if len(processes)==0: break # Jeżeli nie ma procesów do obsłużenia - wyjdź z pętli
+
         sort_again=False        # Flaga do ponownego sortowania tablicy
         if not currentproc:     # Jeżeli żaden proces nie jest obecny
-            for i in processes:     # Iteracja przez tablice procesów
-                if i not in p_queue and i[ARRIVAL] <= t:    # Jeżeli natkniemy się na proces, którego nie ma w kolejce, a czas przybycia minął (lub teraz jest)
-                    p_queue.append(i)       # Dodajemy proces do końca tabeli
+            for j in processes:     # Iteracja przez tablice procesów
+                if j not in p_queue and j[ARRIVAL] <= t:    # Jeżeli natkniemy się na proces, którego nie ma w kolejce, a czas przybycia minął (lub teraz jest)
+                    p_queue.append(j)       # Dodajemy proces do końca tabeli
                     sort_again=True         # Ustawiamy flagę do ponownego sortowania
             if sort_again: p_queue=sorted(p_queue, key=lambda x: x[BURST])  # Kiedy flaga do ponownego sortowania jest ustawiona - ponownie sortujemy kolejkę po burst time
-            currentproc=p_queue[0]      # Obecnym procesem zostaje pierwszy proces w kolejce
+            if len(p_queue)!=0: currentproc=p_queue[0]      # Obecnym procesem zostaje pierwszy proces w kolejce
 
         if currentproc:     # Jeżeli mamy obecny proces
             timeline[t]=currentproc[PID]    # Nanosimy PID obecnego procesu na oś czasu
@@ -42,6 +47,9 @@ def cpu_do_sjf(processes):
                 processes_info[pos][TURNAROUND]=processes_info[pos][EXIT]-processes_info[pos][ARRIVAL]    # Wpisanie czasu turnaround (od przybycia do zakończenia)
                 processes_info[pos][WAIT]=processes_info[pos][TURNAROUND]-processes_info[pos][BURST]      # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
                 currentproc=False   # Żaden proces nie jest teraz obecny
+
+    while timeline[-1]==0: del timeline[-1]
+    max_time=len(timeline)
 
     processes_info=sorted(processes_info, key=lambda x: x[PID]) # Sortowanie tabeli końcowej po PID-zie    
     process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
