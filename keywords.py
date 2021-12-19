@@ -37,4 +37,12 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą
     print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
     print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
 
+def process_order(timeline):
+    order=timeline[:]
+    while 0 in order: order.remove(0)
+    for i in order[:]: 
+        if order.count(i)>1: order.remove(i)
+    print("\nKolejnośc procesów: ")
+    print(order)
+
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
