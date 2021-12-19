@@ -52,5 +52,6 @@ def cpu_do_sjf(processes):
 
     processes_info=sorted(processes_info, key=lambda x: x[PID]) # Sortowanie tabeli końcowej po PID-zie    
     process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
+    process_order(timeline)
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
