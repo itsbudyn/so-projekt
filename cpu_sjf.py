@@ -11,7 +11,6 @@ def cpu_do_sjf(processes):
 
     # Obliczanie czasu wykonywania wszystkich procesów
     max_time=0
-    max_time=0
     for i in processes: 
         max_time+=i[BURST]
         max_time+=i[ARRIVAL]
