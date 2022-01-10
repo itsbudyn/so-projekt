@@ -9,13 +9,13 @@ def get_least_used_pid(freqs_arr):  # Funkcja do otrzymywania PID-u strony najrz
     min_freq=freqs_arr[0][FREQ]
     for i in freqs_arr:             # Iteracja przez tabelę używalności
         if i[FREQ]<min_freq:           # W przypadku znalezienia mniejszej wartości niż poprzenio wpisana
-            min_pid=i[PID]
-            min_freq=i[FREQ]
+            min_pid=i[PID]          # Przyjmowanie nowego najmniejszego PID-u
+            min_freq=i[FREQ]        # Przyjmowanie nowej najmniejszej częstotliwości
     return min_pid
 
 def get_pid_freq(pid:int,freq_arr): # Funkcja do otrzymywania wartości, ile razy strona została użyta
-    for i in freq_arr:
-        if i[PID]==pid: return i[FREQ]
+    for i in freq_arr:      # Iteracja przez tablicę ze stronami
+        if i[PID]==pid: return i[FREQ]      # Przy znalezieniu PIDu zwrot jego częstotliwości
 
 def frames_repr(frames:int,frames_arr,freq): # Funkcja do wyświetlania stanu ramek
     frames_repr=""
@@ -26,24 +26,24 @@ def frames_repr(frames:int,frames_arr,freq): # Funkcja do wyświetlania stanu ra
     return frames_repr  # Zwrot stringa
 
 def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
-    frames_arr=[]       # Tworzenie tabeli stron
+    frames_arr=[]       # Tworzenie tabeli stron (ramek)
     freq_arr=[]         # Tworzenie tabeli zliczającej ilość użyć danej strony
     different_pages=[]  # Tworzenie tymczasowej tabeli ze wszystkimi PID-ami stron
-    swaps=0
+    swaps=0             # Licznik zastąpień stron
 
     for i in calls:     # Przygotowanie tablicy używalności stron
         if i not in different_pages:    # Aby każdy wpis miał unikalny PID
-            page_with_freq=[0,0]
-            different_pages.append(i)
-            page_with_freq[PID]=i
-            freq_arr.append(page_with_freq)
+            page_with_freq=[0,0]        # Przygotowanie szablonowej tablicy strony z częstotliwością
+            different_pages.append(i)   # Dodanie PID-u strony do tablicy unikalnych stron
+            page_with_freq[PID]=i       # Przypisanie PID-u do szablonu
+            freq_arr.append(page_with_freq) # Dopisanie tablicy do tabeli częstotliwości
 
     del different_pages # Tabela już nie jest nam potrzebna
 
     print("Krok","Ramki\t\t","Wym.","Jest",sep="\t")  # Tworzenie pierwszej linijki tabeli z nazwami kolumn
 
     for i in range(len(calls)): # Iteracja przez odwołania
-        print(i+1,"\t│ ",frames_repr(frames,frames_arr,freq_arr)," │\t",calls[i],"\t",calls[i] in frames_arr,sep="\0")   # Wypisywanie linijki zawierająca: Krok, staan ramek, Następne odwołanie, Czy następne odwołanie znajduje się w ramce
+        print(i+1,"\t│ ",frames_repr(frames,frames_arr,freq_arr)," │\t",calls[i],"\t",calls[i] in frames_arr,sep="\0")   # Wypisywanie linijki zawierająca: Krok, stan ramek, Następne odwołanie, Czy następne odwołanie znajduje się w ramce
 
         if calls[i] not in frames_arr[:]:   # Jeżeli nie ma strony w żadnej z ramek
             if len(frames_arr)==frames:     # Jeżeli wszystkie ramki są zajęte
@@ -56,10 +56,11 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
                 swaps+=1    # Inkrementacja licznika zastąpień
             else: frames_arr.append(calls[i])   # Jeżeli są wolne ramki, dopisujemy na koniec tabeli
 
+        # Zwięszenie licznika użyć dla danej strony
         for j in range(len(freq_arr)):      # Zwiększenie licznika użyć o 1
-            if freq_arr[j][PID]==calls[i]: 
-                freq_arr[j][FREQ]+=1
-                break
+            if freq_arr[j][PID]==calls[i]:  # Znalezienie odpowiedniej strony po PID-zie
+                freq_arr[j][FREQ]+=1        # Inkrementacja licznika użyć
+                break                       # Wyjście z pętli for
 
     print("END","\t│ ",frames_repr(frames,frames_arr,freq_arr)," │",sep="\0")    # Wypisywanie ostatecznego stanu ramek
     print("Zastąpień stron:",swaps,"\n")     # Wyświetlanie ilości zastąpień

@@ -8,14 +8,14 @@ def frames_repr(frames:int,frames_arr): # Funkcja do wyświetlania stanu ramek
         if j!=frames-1: frames_repr+=" "        # Dopisywanie znaku spacji między wartościami
     return frames_repr  # Zwrot stringa
 
-def mem_do_fifo(frames:int,calls):  # Tworzenie tabeli stron
-    frames_arr=[]
+def mem_do_fifo(frames:int,calls):  
+    frames_arr=[]   # Tworzenie tabeli stron (ramek)
     swaps=0     # licznik zastąpień stron
 
     print("Krok","Ramki\t","Wym.","Jest",sep="\t")  # Tworzenie pierwszej linijki tabeli z nazwami kolumn
 
     for i in range(len(calls)): # Iteracja przez odwołania
-        print(i+1,"\t│ ",frames_repr(frames,frames_arr)," │\t",calls[i],"\t",calls[i] in frames_arr,sep="\0")   # Wypisywanie linijki zawierająca: Krok, staan ramek, Następne odwołanie, Czy następne odwołanie znajduje się w ramce
+        print(i+1,"\t│ ",frames_repr(frames,frames_arr)," │\t",calls[i],"\t",calls[i] in frames_arr,sep="\0")   # Wypisywanie linijki zawierająca: Krok, stan ramek, Następne odwołanie, Czy następne odwołanie znajduje się w ramce
 
         if calls[i] not in frames_arr:  # Jeżeli nie ma strony w żadnej z ramek
             if len(frames_arr)==frames:     # Jeżeli wszystkie ramki są zajęte
