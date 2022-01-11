@@ -16,10 +16,11 @@ def exit_err(msg:str):
 
 def clearscr(): os.system('cls' if os.name == 'nt' else 'clear')    # Funkcja czyszcząca okno terminalu, działająca na Windowsie i POSIX
 
-def process_table(processes_info,timeline,max_time):    # Część z tabelą
+def process_table(processes_info,timeline,max_time):    # Część z tabelą i eksportem do .CSV
     processes_info=sorted(processes_info, key=lambda x: x[PID]) # Sortowanie tabeli końcowej po PID-zie    
-    csvbuffer="PID,Czas przybycia,Czas wykonywania,Czas zakończenia,Czas istnienia,Czas Oczekiwania\n"
-    print("PID\tArrv.\tBurst\tExit\tTA\tWait")
+    csvbuffer="PID,Czas przybycia,Czas wykonywania,Czas zakończenia,Czas istnienia,Czas Oczekiwania\n"  # Pierwsza linijka pliku .CSV
+
+    print("PID\tArrv.\tBurst\tExit\tTA\tWait")  # Pierwsza linijka drukowanej tabeli
 
     # Liczenie średniej i wyświetlenie tabeli
     ta_total=0
@@ -30,10 +31,10 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą
         w_total+=i[WAIT]            # Sumowanie czasów oczekiwania
         for j in range(len(i)):     # Wyświetlanie tabeli
             if j!=REMAINING:        # Warunek if aby nie wyświetlać pozostałego czasu - wiadomo, że wynosi on 0
-                print(i[j],end="\t")
-                csvbuffer+="{},".format(i[j])
-            else: csvbuffer=csvbuffer[:-1]
-        csvbuffer+="\n"
+                print(i[j],end="\t")    # Drukowanie elementów tabeli
+                csvbuffer+="{},".format(i[j])   # Dopisywanie elementów tabeli do bufora .CSV
+            else: csvbuffer=csvbuffer[:-1]      # Wycięcie ostatniego przecinka z linijki
+        csvbuffer+="\n"     # Nowy wiersz tabeli w buforze .CSV
         print("")
 
     # Obliczanie średnich
@@ -48,17 +49,18 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą
 
     process_order(timeline)     # Wyświetlenie kolejności procesów
 
-    filename=str(input("Nazwa pliku .csv? (pozostawić puste, aby nie generować): "))
-    if filename:
-        if not os.path.isdir("out"): os.mkdir("out") 
-        try:
-            f=open("./out/{}.csv".format(filename),"w",encoding="UTF-8")
-            f.write(csvbuffer)
-            f.close()
-        except Exception as err:
-            print("Wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))
+    filename=str(input("Nazwa pliku .csv? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .CSV
+    if filename:    # W razie zgody
+        try: 
+            if not os.path.isdir("out"): os.mkdir("out")    # Próba utworzenia katalogu out, jeżeli ten nie istnieje
+        except Exception as err: print("Nie można utworzyć katalogu out, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))    # W przypadku błędu informujemy użytkownika i przerywamy zapis
         else:
-            print("Zapisano!")
+            try:
+                f=open("./out/{}.csv".format(filename),"w",encoding="UTF-8")    # Utworzenie, bądź otworzenie istniejącego pliku o podanej nazwie
+                f.write(csvbuffer)      # Zapis do pliku
+                f.close()       # Zamknięcie pliku po zakończonym działaniu
+            except Exception as err: print("Nie można utworzyć pliku, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))   # W razie błędu z zapisem do pliku
+            else: print("Zapisano!")
 
 def process_order(timeline):
     order=timeline[:]
