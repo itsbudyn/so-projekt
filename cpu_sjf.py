@@ -47,11 +47,7 @@ def cpu_do_sjf(processes):
                 processes_info[pos][WAIT]=processes_info[pos][TURNAROUND]-processes_info[pos][BURST]      # Wpisanie czasu oczekiwania procesu (od przybycia do rozpoczęcia wykonywania)
                 currentproc=False   # Żaden proces nie jest teraz obecny
 
-    while timeline[-1]==0: del timeline[-1]     # Usuwanie ciągu zerowych PID-ów (jeżeli występuje) na końcu osi czasu
-    max_time=len(timeline)      # Ustalanie nowego czasu maksymalnego
-
     processes_info=sorted(processes_info, key=lambda x: x[PID]) # Sortowanie tabeli końcowej po PID-zie    
     process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
-    process_order(timeline)     # Wyświetlenie kolejności procesów
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
