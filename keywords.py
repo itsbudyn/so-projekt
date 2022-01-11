@@ -17,6 +17,7 @@ def exit_err(msg:str):
 def clearscr(): os.system('cls' if os.name == 'nt' else 'clear')    # Funkcja czyszcząca okno terminalu, działająca na Windowsie i POSIX
 
 def process_table(processes_info,timeline,max_time):    # Część z tabelą
+    csvbuffer="PID,Czas przybycia,Czas wykonywania,Czas zakończenia,Czas istnienia,Czas Oczekiwania\n"
     print("PID\tArrv.\tBurst\tExit\tTA\tWait")
 
     # Liczenie średniej i wyświetlenie tabeli
@@ -27,7 +28,11 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą
         ta_total+=i[TURNAROUND]     # Sumowanie czasów turnaround
         w_total+=i[WAIT]            # Sumowanie czasów oczekiwania
         for j in range(len(i)):     # Wyświetlanie tabeli
-            if j!=REMAINING: print(i[j],end="\t")   # Warunek if aby nie wyświetlać pozostałego czasu - wiadomo, że wynosi on 0
+            if j!=REMAINING:        # Warunek if aby nie wyświetlać pozostałego czasu - wiadomo, że wynosi on 0
+                print(i[j],end="\t")
+                csvbuffer+="{},".format(i[j])
+            else: csvbuffer=csvbuffer[:-1]
+        csvbuffer+="\n"
         print("")
 
     # Obliczanie średnich
@@ -36,6 +41,23 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą
 
     print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
     print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
+    
+    while timeline[-1]==0: del timeline[-1]     # Usuwanie ciągu zerowych PID-ów (jeżeli występuje) na końcu osi czasu
+    max_time=len(timeline)      # Ustalanie nowego czasu maksymalnego
+
+    process_order(timeline)     # Wyświetlenie kolejności procesów
+
+    filename=str(input("Nazwa pliku .csv? (pozostawić puste, aby nie generować): "))
+    if filename:
+        if not os.path.isdir("out"): os.mkdir("out") 
+        try:
+            f=open("./out/{}.csv".format(filename),"w",encoding="UTF-8")
+            f.write(csvbuffer)
+            f.close()
+        except Exception as err:
+            print("Wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))
+        else:
+            print("Zapisano!")
 
 def process_order(timeline):
     order=timeline[:]
