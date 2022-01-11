@@ -17,6 +17,7 @@ def exit_err(msg:str):
 def clearscr(): os.system('cls' if os.name == 'nt' else 'clear')    # Funkcja czyszcząca okno terminalu, działająca na Windowsie i POSIX
 
 def process_table(processes_info,timeline,max_time):    # Część z tabelą
+    processes_info=sorted(processes_info, key=lambda x: x[PID]) # Sortowanie tabeli końcowej po PID-zie    
     csvbuffer="PID,Czas przybycia,Czas wykonywania,Czas zakończenia,Czas istnienia,Czas Oczekiwania\n"
     print("PID\tArrv.\tBurst\tExit\tTA\tWait")
 
