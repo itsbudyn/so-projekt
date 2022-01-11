@@ -49,6 +49,18 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą i e
 
     process_order(timeline)     # Wyświetlenie kolejności procesów
 
+    csvexport(csvbuffer)    # Eksport tabeli procesów do .CSV
+    del csvbuffer   # Usunięcie niepotrzebnego buforu
+
+def process_order(timeline):
+    order=timeline[:]
+    while 0 in order: order.remove(0)
+    for i in order[:]: 
+        if order.count(i)>1: order.remove(i)
+    print("\nKolejnośc procesów: ")
+    print(order)
+
+def csvexport(csvbuffer):
     filename=str(input("Nazwa pliku .csv? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .CSV
     if filename:    # W razie zgody
         try: 
@@ -61,14 +73,5 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą i e
                 f.close()       # Zamknięcie pliku po zakończonym działaniu
             except Exception as err: print("Nie można utworzyć pliku, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))   # W razie błędu z zapisem do pliku
             else: print("Zapisano!")
-    del csvbuffer
-
-def process_order(timeline):
-    order=timeline[:]
-    while 0 in order: order.remove(0)
-    for i in order[:]: 
-        if order.count(i)>1: order.remove(i)
-    print("\nKolejnośc procesów: ")
-    print(order)
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
