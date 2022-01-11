@@ -61,6 +61,7 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą i e
                 f.close()       # Zamknięcie pliku po zakończonym działaniu
             except Exception as err: print("Nie można utworzyć pliku, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))   # W razie błędu z zapisem do pliku
             else: print("Zapisano!")
+    del csvbuffer
 
 def process_order(timeline):
     order=timeline[:]
