@@ -1,3 +1,4 @@
+from keywords import csvexport
 # Algorytm zastępowania stron LFU
 
 # Słowa kluczowe
@@ -26,6 +27,11 @@ def frames_repr(frames:int,frames_arr,freq): # Funkcja do wyświetlania stanu ra
     return frames_repr  # Zwrot stringa
 
 def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
+    # Tworzenie pierwszej linijki pliku CSV
+    frames_txt=""
+    for i in range(frames): frames_txt+="Ramka {},".format(i)   # Każda ramka ma swoją kolumnę
+    csvbuffer="Krok,{}Wymagana,Jest,Trafień,Pudeł\n".format(frames_txt) # Gotowa pierwsza linijka
+
     frames_arr=[]       # Tworzenie tabeli stron (ramek)
     freq_arr=[]         # Tworzenie tabeli zliczającej ilość użyć danej strony
     different_pages=[]  # Tworzenie tymczasowej tabeli ze wszystkimi PID-ami stron
@@ -45,6 +51,13 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
 
     for i in range(len(calls)): # Iteracja przez odwołania
         print(i+1,"\t│ ",frames_repr(frames,frames_arr,freq_arr)," │\t",calls[i],"\t",calls[i] in frames_arr,"\t",hits,"\t",miss,sep="\0")   # Wypisywanie linijki zawierająca: Krok, stan ramek, Następne odwołanie, Czy następne odwołanie znajduje się w ramce
+
+        # Dopisywanie linijki do pliku .CSV
+        csvbuffer+="{},".format(i+1)    # Liczba porządkowa
+        for j in range(frames):         # Iteracja przez ramki
+            try: csvbuffer+="{},".format(frames_arr[j]) # Dopisywanie PID-u, który zajmuje ramkę
+            except IndexError: csvbuffer+=","           # W przypadku wolnej ramki, czyli PID-u o wartości NULL
+        csvbuffer+="{},{},{},{}\n".format(calls[i],calls[i] in frames_arr,hits,miss)    # Dopisywanie pozostałych linijek
 
         if calls[i] not in frames_arr[:]:   # Jeżeli nie ma strony w żadnej z ramek
             miss+=1    # Inkrementacja licznika nietrafień
@@ -76,5 +89,15 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
     print("\nUŻYĆ:\t",end="\0")
     for i in freq_arr: print(i[FREQ],end="\t")
     print("")
+
+    # Linijka ze stanem ostatecznym
+    csvbuffer+="KONIEC,"    # Krok o nazwie KONIEC
+    for j in range(frames): # Iteracja przez ramki
+            try: csvbuffer+="{},".format(frames_arr[j]) # Dopisywanie PID-u, który zajmuje ramkę
+            except IndexError: csvbuffer+=","           # W przypadku wolnej ramki, czyli PID-u o wartości NULL
+    csvbuffer+=",,{},{}".format(hits,miss)  # Dopisywanie pozostałych linijek, z pominięciem wymaganej strony, i czy takowa się znajduje w ramkach
+    csvexport(csvbuffer)    # Eksport wyniku do pliku .CSV
+    
+    del csvbuffer   # Usunięcie buforu CSV
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
