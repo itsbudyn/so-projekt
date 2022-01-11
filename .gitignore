@@ -5,3 +5,4 @@ __pycache__/keywords.cpython-310.pyc
 __pycache__/mem_create.cpython-310.pyc
 __pycache__/mem_fifo.cpython-310.pyc
 __pycache__/mem_lfu.cpython-310.pyc
+out/*
