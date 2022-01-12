@@ -6,10 +6,10 @@ from mem_fifo import mem_do_fifo                    # Moduły do algorytmów zas
 from mem_lfu import mem_do_lfu
 from keywords import clearscr                       # Pozostałe moduły
 from sys import exit
-import copy     # Ten moduł jest wymagany do kopiowania listy procesów w przypadku
-                # uruchamiania obu algorytmów - z jakiegoś powodu nie jestem w stanie
-                # utworzyć kopii jakimikolwiek wbudowanymi metodami ani slicingiem
-                # [:], wobec czego jestem zmuszony użyć copy.deepcopy()
+from copy import deepcopy   # Ten moduł jest wymagany do kopiowania listy procesów w przypadku
+                            # uruchamiania obu algorytmów - z jakiegoś powodu nie jestem w stanie
+                            # utworzyć kopii jakimikolwiek wbudowanymi metodami ani slicingiem
+                            # [:], wobec czego jestem zmuszony użyć copy.deepcopy()
 
 manual=True     # Czy użytkownik ma ręcznie definiować dane, czy mamy generować za niego?
 
@@ -42,16 +42,23 @@ ALBORYTMY ZASTĘPOWANIA STRON
         case 2: cpu_do_sjf(create_processes(manual))
         case 3:
             processes_fifo=create_processes(manual)
-            processes_sjf=copy.deepcopy(processes_fifo)
+            processes_sjf=deepcopy(processes_fifo)
             cpu_do_fifo(processes_fifo)
             cpu_do_sjf(processes_sjf)
         case 4:
-            mem_do_fifo(create_frames(),create_calls())
+            mem_do_fifo(create_frames(),create_calls(manual))
         case 5: 
-            mem_do_lfu(create_frames(),create_calls())
+            mem_do_lfu(create_frames(),create_calls(manual))
+        case 6:
+            frames=create_frames()
+            calls_fifo=create_calls(manual)
+            calls_lfu=deepcopy(calls_fifo)
+            mem_do_fifo(frames,calls_fifo)
+            mem_do_lfu(frames,calls_lfu)
         case 7:
             if manual: manual=False
             else: manual=True
+            print("Przełączono tryb wpisywania danych")
         case 0: exit(0)
         case default: print("Nie rozpoznano opcji!")
     input("Aby kontynuować, naciśnij enter... ")    # Po zakończeniu funkcji wstrzymuje program
