@@ -5,7 +5,8 @@ def cpu_do_fifo(processes):
     if processes==None:
         print("Algorytm nie może zostać wykonany.")
         return
-        
+    else: print("POCZĄTEK ALGORYTMU FCFS")
+
     processes=sorted(processes, key=lambda x: x[ARRIVAL])   # Sortowanie procesów po czasie przybycia
     processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 
@@ -35,5 +36,6 @@ def cpu_do_fifo(processes):
                 completed+=1    # Aby w tablicy processes_info było wiadomo na którym wpisie pracujemy
 
     process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
+    print("KONIEC ALGORYTMU FCFS")
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik

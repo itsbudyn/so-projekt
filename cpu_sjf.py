@@ -9,7 +9,8 @@ def cpu_do_sjf(processes):
     if processes==None:
         print("Algorytm nie może zostać wykonany.")
         return
-        
+    else: print("POCZĄTEK ALGORYTMU SJF")
+
     processes=sorted(processes, key=lambda x: x[BURST])   # Sortowanie procesów po czasie wykonywania
     processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 
@@ -52,5 +53,6 @@ def cpu_do_sjf(processes):
                 currentproc=False   # Żaden proces nie jest teraz obecny
 
     process_table(processes_info,timeline,max_time)     # Wyświetlenie tabeli
+    print("KONIEC ALGORYTMU SJF")
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
