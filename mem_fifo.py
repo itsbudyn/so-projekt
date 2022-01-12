@@ -13,6 +13,7 @@ def mem_do_fifo(frames:int,calls):
     if frames==None or calls==None:
         print("Algorytm nie może zostać wykonany.")
         return
+    else: print("POCZĄTEK ALGORYTMU FIFO - Ciąg odwołań:",calls)
 
     # Tworzenie pierwszej linijki pliku CSV
     frames_txt=""
@@ -54,5 +55,6 @@ def mem_do_fifo(frames:int,calls):
     csvexport(csvbuffer)    # Eksport wyniku do pliku .CSV
     
     del csvbuffer   # Usunięcie buforu CSV
+    print("KONIEC ALGORYTMU FIFO")
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik

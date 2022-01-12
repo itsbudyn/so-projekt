@@ -30,6 +30,7 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
     if frames==None or calls==None:
         print("Algorytm nie może zostać wykonany.")
         return
+    else: print("POCZĄTEK ALGORYTMU LFU - Ciąg odwołań:",calls)
 
     # Tworzenie pierwszej linijki pliku CSV
     frames_txt=""
@@ -103,5 +104,6 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
     csvexport(csvbuffer)    # Eksport wyniku do pliku .CSV
     
     del csvbuffer   # Usunięcie buforu CSV
+    print("KONIEC ALGORYTMU LFU")
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik
