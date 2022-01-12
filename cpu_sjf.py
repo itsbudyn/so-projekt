@@ -6,6 +6,10 @@ def get_pid_pos(pid:int,arr):   # Uzyskiwanie PID-u procesu z dowolnej tabeli
         if i[PID]==pid: return arr.index(i) # W przypadku wystąpienia - zwrot indeksu tabeli
 
 def cpu_do_sjf(processes):
+    if processes==None:
+        print("Algorytm nie może zostać wykonany.")
+        return
+        
     processes=sorted(processes, key=lambda x: x[BURST])   # Sortowanie procesów po czasie wykonywania
     processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 

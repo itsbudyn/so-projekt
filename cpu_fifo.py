@@ -2,6 +2,10 @@
 from keywords import *
 
 def cpu_do_fifo(processes):
+    if processes==None:
+        print("Algorytm nie może zostać wykonany.")
+        return
+        
     processes=sorted(processes, key=lambda x: x[ARRIVAL])   # Sortowanie procesów po czasie przybycia
     processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 
