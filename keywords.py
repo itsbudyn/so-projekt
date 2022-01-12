@@ -9,11 +9,6 @@ TURNAROUND  = 4
 WAIT        = 5
 REMAINING   = 6
 
-# Funkcja kończąca działanie programu, która też drukuje wiadomość odpowiednią do błędu, jaki popełnił użytkownik
-def exit_err(msg:str):
-    print("Błąd:",msg)
-    exit(-1)
-
 def clearscr(): os.system('cls' if os.name == 'nt' else 'clear')    # Funkcja czyszcząca okno terminalu, działająca na Windowsie i POSIX
 
 def process_table(processes_info,timeline,max_time):    # Część z tabelą i eksportem do .CSV
