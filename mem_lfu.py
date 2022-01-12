@@ -27,6 +27,10 @@ def frames_repr(frames:int,frames_arr,freq): # Funkcja do wyświetlania stanu ra
     return frames_repr  # Zwrot stringa
 
 def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
+    if frames==None or calls==None:
+        print("Algorytm nie może zostać wykonany.")
+        return
+
     # Tworzenie pierwszej linijki pliku CSV
     frames_txt=""
     for i in range(frames): frames_txt+="Ramka {},".format(i)   # Każda ramka ma swoją kolumnę

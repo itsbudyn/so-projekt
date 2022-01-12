@@ -10,6 +10,10 @@ def frames_repr(frames:int,frames_arr): # Funkcja do wyświetlania stanu ramek
     return frames_repr  # Zwrot stringa
 
 def mem_do_fifo(frames:int,calls):
+    if frames==None or calls==None:
+        print("Algorytm nie może zostać wykonany.")
+        return
+
     # Tworzenie pierwszej linijki pliku CSV
     frames_txt=""
     for i in range(frames): frames_txt+="Ramka {},".format(i)   # Każda ramka ma swoją kolumnę
