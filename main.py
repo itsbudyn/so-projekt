@@ -45,6 +45,7 @@ ALBORYTMY ZASTĘPOWANIA STRON
             processes_sjf=deepcopy(processes_fifo)
             cpu_do_fifo(processes_fifo)
             cpu_do_sjf(processes_sjf)
+            del processes_fifo, processes_sjf
         case 4:
             mem_do_fifo(create_frames(),create_calls(manual))
         case 5: 
@@ -55,6 +56,7 @@ ALBORYTMY ZASTĘPOWANIA STRON
             calls_lfu=deepcopy(calls_fifo)
             mem_do_fifo(frames,calls_fifo)
             mem_do_lfu(frames,calls_lfu)
+            del calls_fifo, calls_lfu
         case 7:
             if manual: manual=False
             else: manual=True
