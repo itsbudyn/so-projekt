@@ -2,7 +2,7 @@
 from keywords import *
 
 def cpu_do_fifo(processes):
-    if processes==None:
+    if processes==None:     # W przypadku, gdy tablica processes nie istnieje - to się dzieje w przypadku złego wprowadzenia danych
         print("Algorytm nie może zostać wykonany.")
         return
     else: print("POCZĄTEK ALGORYTMU FCFS")

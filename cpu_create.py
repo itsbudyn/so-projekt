@@ -49,10 +49,15 @@ def create_processes_auto(count:int,arrival_max:int,burst_max:int):
     return processes        # Koniec funkcji - zwracanie tabeli
 
 def create_processes(manual:bool): 
-    if manual: return create_processes_manual()
+    if manual: return create_processes_manual()     # Czy użytkownik stworzy procesy ręcznie, czy pomoże w ich generowaniu
     else: 
         while True:
             try: 
+                # Pobieramy wartości count, max_arrival, max_burst
+                # assert wywoła wyjątek w przypadku podania wartości
+                # spoza zakresu, który zostanie złapany, po czym zostanie
+                # wydrukowany odpowiedni komunikat, a użytkownik dostanie
+                # kolejną szansę na wprowadzenie danych.
                 count=int(input("Ile procesów utworzyć? (min=0) "))
                 assert count        > 0
                 max_arrival=int(input("Maksymalny zakres czasów przybycia? (min=0) "))
@@ -61,6 +66,6 @@ def create_processes(manual:bool):
                 assert max_burst    > 0
             except ValueError: print("Wartość nie jest liczbą całkowitą!")
             except AssertionError: print("Wartość wykracza poza zakres")
-            else: return create_processes_auto(count,max_arrival,max_burst)
+            else: return create_processes_auto(count,max_arrival,max_burst)     # W przypadku poprawności podanych danych
 
 if __name__ == "__main__": print("Proszę uruchomić plik main.py")   # Gdyby ktoś przypadkiem uruchomił ten plik

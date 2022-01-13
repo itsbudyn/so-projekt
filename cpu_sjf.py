@@ -6,7 +6,7 @@ def get_pid_pos(pid:int,arr):   # Uzyskiwanie PID-u procesu z dowolnej tabeli
         if i[PID]==pid: return arr.index(i) # W przypadku wystąpienia - zwrot indeksu tabeli
 
 def cpu_do_sjf(processes):
-    if processes==None:
+    if processes==None:     # W przypadku, gdy tablica processes nie istnieje - to się dzieje w przypadku złego wprowadzenia danych
         print("Algorytm nie może zostać wykonany.")
         return
     else: print("POCZĄTEK ALGORYTMU SJF")

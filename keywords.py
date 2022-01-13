@@ -47,13 +47,12 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą i e
     csvexport(csvbuffer)    # Eksport tabeli procesów do .CSV
     del csvbuffer   # Usunięcie niepotrzebnego buforu
 
-def process_order(timeline):
-    order=timeline[:]
-    while 0 in order: order.remove(0)
-    for i in order[:]: 
-        if order.count(i)>1: order.remove(i)
-    print("\nKolejnośc procesów: ")
-    print(order)
+def process_order(timeline):    # Otrzymywanie kolejności występujących procesów na podstawie osi czasu
+    order=timeline[:]           # Tworzenie kopii tablicy
+    while 0 in order: order.remove(0)   # Usuwanie PID-ów o wartości 0
+    for i in order[:]:      # Iteracja przez tablicę
+        if order.count(i)>1: order.remove(i)    # Usuwanie wartości występujących więcej niż raz
+    print("\nKolejnośc procesów: ",order)       # Drukowanie gotowej tabliccy
 
 def csvexport(csvbuffer):
     filename=str(input("Nazwa pliku .csv? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .CSV

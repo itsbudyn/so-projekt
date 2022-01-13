@@ -27,7 +27,7 @@ def frames_repr(frames:int,frames_arr,freq): # Funkcja do wyświetlania stanu ra
     return frames_repr  # Zwrot stringa
 
 def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
-    if frames==None or calls==None:
+    if frames==None or calls==None:     # W przypadku, gdy tablica calls bądź wartość frames nie istnieje - to się dzieje w przypadku złego wprowadzenia danych
         print("Algorytm nie może zostać wykonany.")
         return
     else: print("POCZĄTEK ALGORYTMU LFU - Ciąg odwołań:",calls)
