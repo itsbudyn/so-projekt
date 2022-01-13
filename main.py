@@ -18,8 +18,8 @@ while True:     # Menu główne programu
 
     # Linijka wskazująca, czy dane będą generowane automatycznie, czy ręcznie
     modeselect=""
-    if manual: modeselect="\t<RĘCZNE>\tAUTOMATYCZNE"
-    else: modeselect="\tRĘCZNE\t<AUTOMATYCZNE>"
+    if manual: modeselect="\t< RĘCZNE >\t  AUTOMATYCZNE"
+    else: modeselect="\t  RĘCZNE  \t< AUTOMATYCZNE >"
 
     print( 
 """MENU GŁÓWNE
