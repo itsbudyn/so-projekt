@@ -44,6 +44,7 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą i e
 
     process_order(timeline)     # Wyświetlenie kolejności procesów
 
+    csvbuffer+="ŚREDNIA,,,,{},{}".format(avg_ta,avg_w)
     csvexport(csvbuffer)    # Eksport tabeli procesów do .CSV
     del csvbuffer   # Usunięcie niepotrzebnego buforu
 
