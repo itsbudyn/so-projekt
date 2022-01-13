@@ -36,11 +36,11 @@ def process_table(processes_info,timeline,max_time):    # Część z tabelą i e
     avg_ta=round(ta_total/len(processes_info),2)
     avg_w=round(w_total/len(processes_info),2)
 
-    print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
-    print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
-    
     while timeline[-1]==0: del timeline[-1]     # Usuwanie ciągu zerowych PID-ów (jeżeli występuje) na końcu osi czasu
     max_time=len(timeline)      # Ustalanie nowego czasu maksymalnego
+
+    print("średnie: \t\t\t{}\t{}".format(avg_ta,avg_w)) # Wyświetlanie średnich
+    print("\n0",timeline,max_time)  # Wyświetlanie osi czasu
 
     process_order(timeline)     # Wyświetlenie kolejności procesów
 
