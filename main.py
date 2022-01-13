@@ -46,10 +46,8 @@ ALBORYTMY ZASTĘPOWANIA STRON
             cpu_do_fifo(processes_fifo)
             cpu_do_sjf(processes_sjf)
             del processes_fifo, processes_sjf
-        case 4:
-            mem_do_fifo(create_frames(),create_calls(manual))
-        case 5: 
-            mem_do_lfu(create_frames(),create_calls(manual))
+        case 4: mem_do_fifo(create_frames(),create_calls(manual))
+        case 5: mem_do_lfu(create_frames(),create_calls(manual))
         case 6:
             frames=create_frames()
             calls_fifo=create_calls(manual)
