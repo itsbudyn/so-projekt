@@ -7,7 +7,6 @@ def cpu_do_fifo(processes):
         return
     else: print("POCZĄTEK ALGORYTMU FCFS")
 
-    processes=sorted(processes, key=lambda x: x[ARRIVAL])   # Sortowanie procesów po czasie przybycia
     processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 
     # Obliczanie czasu wykonywania algorytmu
@@ -24,8 +23,8 @@ def cpu_do_fifo(processes):
 
     for i in range(len(timeline)):  # Pętla nanosząca procesy na oś czasu
         t+=1
-        if len(processes)==0: break
-        if t>=processes[0][1]:   # Jeżeli proces dotarł - czas na osi czasu jesst większy bądź równy czasu przybycia
+        if len(processes)==0: break # Jeżeli kolejka procesów jest pusta
+        if t>=processes[0][ARRIVAL]:   # Jeżeli proces dotarł - czas na osi czasu jesst większy bądź równy czasu przybycia
             timeline[t]=processes[0][PID]       # Wpisanie na pozycji osi czasu PID-u procesu
             processes[0][REMAINING]-=1          # Zbicie pozostałego czasu o 1 jednostkę
             if processes[0][REMAINING]==0:      # Jeżeli proces się zakończył
