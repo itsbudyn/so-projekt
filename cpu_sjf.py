@@ -11,7 +11,6 @@ def cpu_do_sjf(processes):
         return
     else: print("POCZĄTEK ALGORYTMU SJF")
 
-    processes=sorted(processes, key=lambda x: x[BURST])   # Sortowanie procesów po czasie wykonywania
     processes_info=processes[:] # Utwórz kopię kolejki procesów, potrzebne do tabeli końcowej
 
     # Obliczanie czasu wykonywania wszystkich procesów
