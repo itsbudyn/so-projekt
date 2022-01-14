@@ -32,6 +32,8 @@ def create_processes_manual():
         process[BURST]      =burst_times[i] # Nadawanie czasu wykonania
         process[REMAINING]  =process[BURST] # Nadawanie pozostałego czasu - tutaj równego czasowi wykonywaniea
         processes.append(process)           # Dodawanie procesu do tabeli
+
+    processes=sorted(processes, key=lambda x: x[ARRIVAL])   # Sortowanie procesów po czasie przybycia
     return processes        # Koniec funkcji - zwracanie tabeli
 
 def create_processes_auto(count:int,arrival_max:int,burst_max:int):
@@ -46,6 +48,7 @@ def create_processes_auto(count:int,arrival_max:int,burst_max:int):
         process[REMAINING]  =process[BURST]         # Nadawanie pozostałego czasu - tutaj równego czasowi wykonywaniea
         processes.append(process)           # Dodawanie procesu do tabeli
 
+    processes=sorted(processes, key=lambda x: x[ARRIVAL])   # Sortowanie procesów po czasie przybycia
     return processes        # Koniec funkcji - zwracanie tabeli
 
 def create_processes(manual:bool): 
