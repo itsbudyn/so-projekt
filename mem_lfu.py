@@ -74,7 +74,7 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
                 least_used_pid=get_least_used_pid(freq_t)   # Znalezienie najrzadziej używanego PID-u
                 frames_arr[frames_arr.index(least_used_pid)]=calls[i]   # Zastąpienie najrzadziej używanej strony
             else: frames_arr.append(calls[i])   # Jeżeli są wolne ramki, dopisujemy na koniec tabeli
-        else: hits+=1
+        else: hits+=1   # Jeżeli jest strona w ramkach, inkrementujemy licznik trafień
 
         # Zwięszenie licznika użyć dla danej strony
         for j in range(len(freq_arr)):      # Zwiększenie licznika użyć o 1

@@ -36,7 +36,7 @@ def cpu_do_sjf(processes):
                 if j not in p_queue and j[ARRIVAL] <= t:    # Jeżeli natkniemy się na proces, którego nie ma w kolejce, a czas przybycia minął (lub teraz jest)
                     p_queue.append(j)       # Dodajemy proces do końca tabeli
                     sort_again=True         # Ustawiamy flagę do ponownego sortowania
-            if sort_again: p_queue=sorted(p_queue, key=lambda x: x[BURST])  # Kiedy flaga do ponownego sortowania jest ustawiona - ponownie sortujemy kolejkę po burst time
+            if sort_again: p_queue=sorted(p_queue, key=lambda x: x[BURST])  # Kiedy flaga do ponownego sortowania jest ustawiona - sortujemy kolejkę po burst time
             if len(p_queue)!=0: currentproc=p_queue[0]      # Obecnym procesem zostaje pierwszy proces w kolejce
 
         if currentproc:     # Jeżeli mamy obecny proces
