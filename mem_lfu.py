@@ -67,11 +67,11 @@ def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
         if calls[i] not in frames_arr[:]:   # Jeżeli nie ma strony w żadnej z ramek
             miss+=1    # Inkrementacja licznika nietrafień
             if len(frames_arr)==frames:     # Jeżeli wszystkie ramki są zajęte
-                freq_t=[]   # Tworzenie tymczasowej tabeli
+                freq_t=[]   # Tworzenie tymczasowej tabeli, która będzie obecnym stanem ramek
                 for k in frames_arr:    # Iteracja przez tabelę
                     proc_t=[k,get_pid_freq(k,freq_arr)] # Tworzenie tymczasowego procesu..
-                    freq_t.append(proc_t)               # ... który zostanie wpisany do tymczasowej tabeli
-                least_used_pid=get_least_used_pid(freq_t)   # Znalezienie najrzadziej używanego PID-u
+                    freq_t.append(proc_t)               # ... który zostanie wpisany do tymczasowej tabeli ramek
+                least_used_pid=get_least_used_pid(freq_t)   # Znalezienie najrzadziej używanego PID-u w obecnych ramkach
                 frames_arr[frames_arr.index(least_used_pid)]=calls[i]   # Zastąpienie najrzadziej używanej strony
             else: frames_arr.append(calls[i])   # Jeżeli są wolne ramki, dopisujemy na koniec tabeli
         else: hits+=1   # Jeżeli jest strona w ramkach, inkrementujemy licznik trafień
