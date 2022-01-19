@@ -2,6 +2,30 @@
 from keywords import *
 from random import randint
 
+def export_processes(processes):
+    filename=str(input("Nazwa pliku .txt? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .CSV
+    if filename:    # W razie zgody
+        try: 
+            if not os.path.isdir("in"): os.mkdir("in")    # Próba utworzenia katalogu out, jeżeli ten nie istnieje
+        except Exception as err: print("Nie można utworzyć katalogu in, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))    # W przypadku błędu informujemy użytkownika i przerywamy zapis
+        else:
+            try:
+                f=open("./in/{}.txt".format(filename),"w",encoding="UTF-8")    # Utworzenie, bądź otworzenie istniejącego pliku o podanej nazwie
+                strbuffer=["",""]       # Przygotowanie bufora tekstowego, do zapisania do pliku
+                for i in processes:     # Iteracja przez procesy
+                    strbuffer[0]+="{} ".format(i[ARRIVAL])  # Pobranie wszystkich czasów przybycia
+                    strbuffer[1]+="{} ".format(i[BURST])    # Pobranie wszystkich czasów wykonywania
+                strbuffer[0]=strbuffer[0][:-1]      # Wycięcie zbędnych spacji na końcu
+                strbuffer[1]=strbuffer[1][:-1]
+                # Zapis do pliku
+                f.write(strbuffer[0])
+                f.write("\n")      
+                f.write(strbuffer[1])
+                f.write("\n")
+                f.close()       # Zamknięcie pliku po zakończonym działaniu
+            except Exception as err: print("Nie można utworzyć pliku, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))   # W razie błędu z zapisem do pliku
+            else: print("Zapisano!")
+
 def create_processes_manual():
     processes=[]    # tworzenie nowej tabeli, gdzie będą dodane procesy
     try:
@@ -34,6 +58,7 @@ def create_processes_manual():
         processes.append(process)           # Dodawanie procesu do tabeli
 
     processes=sorted(processes, key=lambda x: x[ARRIVAL])   # Sortowanie procesów po czasie przybycia
+    export_processes(processes)
     return processes        # Koniec funkcji - zwracanie tabeli
 
 def create_processes_auto(count:int,arrival_max:int,burst_max:int):
@@ -49,6 +74,7 @@ def create_processes_auto(count:int,arrival_max:int,burst_max:int):
         processes.append(process)           # Dodawanie procesu do tabeli
 
     processes=sorted(processes, key=lambda x: x[ARRIVAL])   # Sortowanie procesów po czasie przybycia
+    export_processes(processes)
     return processes        # Koniec funkcji - zwracanie tabeli
 
 def create_processes(manual:bool): 
