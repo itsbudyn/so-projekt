@@ -1,4 +1,5 @@
 from keywords import csvexport
+from mem_create import export_calls
 # Algorytm zastępowania stron LFU
 
 # Słowa kluczowe
@@ -26,11 +27,13 @@ def frames_repr(frames:int,frames_arr,freq): # Funkcja do wyświetlania stanu ra
         if j!=frames-1: frames_repr+=" "        # Dopisywanie znaku spacji między wartościami
     return frames_repr  # Zwrot stringa
 
-def mem_do_lfu(frames:int,calls):   # Główna funkcja LFU
+def mem_do_lfu(frames:int,calls,exportPrompt=False):   # Główna funkcja LFU
     if frames==None or calls==None:     # W przypadku, gdy tablica calls bądź wartość frames nie istnieje - to się dzieje w przypadku złego wprowadzenia danych
         print("Algorytm nie może zostać wykonany.")
         return
-    else: print("POCZĄTEK ALGORYTMU LFU - Ciąg odwołań:",calls)
+    else: 
+        if exportPrompt: export_calls(frames,calls) # Pytamy użytkownika, czy chce wyeksportować tablicę wejściową do pliku txt - Flaga if jest po to, aby przy uruchamianiu obu algorytmów nie pytać użytkownika 2 razy o eksport danych
+        print("POCZĄTEK ALGORYTMU LFU - Ciąg odwołań:",calls)
 
     # Tworzenie pierwszej linijki pliku CSV
     frames_txt=""

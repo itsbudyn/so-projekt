@@ -1,4 +1,5 @@
 from keywords import csvexport
+from mem_create import export_calls
 # Algorytm zastępowania stron FIFO
 
 def frames_repr(frames:int,frames_arr): # Funkcja do wyświetlania stanu ramek
@@ -13,7 +14,9 @@ def mem_do_fifo(frames:int,calls):
     if frames==None or calls==None:     # W przypadku, gdy tablica calls bądź wartość frames nie istnieje - to się dzieje w przypadku złego wprowadzenia danych
         print("Algorytm nie może zostać wykonany.")
         return
-    else: print("POCZĄTEK ALGORYTMU FIFO - Ciąg odwołań:",calls)
+    else:
+        export_calls(frames,calls)      # Pytamy użytkownika, czy chce wyeksportować tablicę wejściową do pliku txt
+        print("POCZĄTEK ALGORYTMU FIFO - Ciąg odwołań:",calls)
 
     # Tworzenie pierwszej linijki pliku CSV
     frames_txt=""
