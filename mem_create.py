@@ -1,5 +1,25 @@
 # Moduł pomagający w tworzeniu tablicy ramek
 from random import randint
+import os
+
+def export_calls(frames:int,calls):
+    filename=str(input("Nazwa pliku .txt? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .CSV
+    if filename:    # W razie zgody
+        try: 
+            if not os.path.isdir("in"): os.mkdir("in")    # Próba utworzenia katalogu out, jeżeli ten nie istnieje
+        except Exception as err: print("Nie można utworzyć katalogu in, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))    # W przypadku błędu informujemy użytkownika i przerywamy zapis
+        else:
+            try:
+                strbuffer="{}\n".format(frames)
+                f=open("./in/{}.txt".format(filename),"w",encoding="UTF-8")    # Utworzenie, bądź otworzenie istniejącego pliku o podanej nazwie
+                for i in calls: strbuffer+="{} ".format(i)
+                strbuffer=strbuffer[:-1]      # Wycięcie zbędnej spacji na końcu
+                strbuffer+="\n"
+                # Zapis do pliku
+                f.write(strbuffer)
+                f.close()       # Zamknięcie pliku po zakończonym działaniu
+            except Exception as err: print("Nie można utworzyć pliku, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))   # W razie błędu z zapisem do pliku
+            else: print("Zapisano!")
 
 def create_frames():    # Pobieranie wartości liczbowej, która mówi na ilu ramkach będziemy pracować
     try: 
