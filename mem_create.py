@@ -3,20 +3,19 @@ from random import randint
 import os
 
 def export_calls(frames:int,calls):
-    filename=str(input("Nazwa pliku .txt? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .CSV
+    filename=str(input("Nazwa pliku .txt? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .TXT
     if filename:    # W razie zgody
         try: 
             if not os.path.isdir("in"): os.mkdir("in")    # Próba utworzenia katalogu out, jeżeli ten nie istnieje
         except Exception as err: print("Nie można utworzyć katalogu in, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))    # W przypadku błędu informujemy użytkownika i przerywamy zapis
         else:
             try:
-                strbuffer="{}\n".format(frames)
+                strbuffer="{}\n".format(frames)     # Pierwsza linijka to ilość ramek
                 f=open("./in/{}.txt".format(filename),"w",encoding="UTF-8")    # Utworzenie, bądź otworzenie istniejącego pliku o podanej nazwie
-                for i in calls: strbuffer+="{} ".format(i)
+                for i in calls: strbuffer+="{} ".format(i)  # Druga linijka to ciąg odwołań
                 strbuffer=strbuffer[:-1]      # Wycięcie zbędnej spacji na końcu
-                strbuffer+="\n"
-                # Zapis do pliku
-                f.write(strbuffer)
+                strbuffer+="\n"     # Dodanie pustej linijki
+                f.write(strbuffer)  # Zapis do pliku
                 f.close()       # Zamknięcie pliku po zakończonym działaniu
             except Exception as err: print("Nie można utworzyć pliku, ponieważ wystąpił nieoczekiwany błąd {}. Sprawdź prawa do zapisu, i spróbuj ponownie.".format(err))   # W razie błędu z zapisem do pliku
             else: print("Zapisano!")

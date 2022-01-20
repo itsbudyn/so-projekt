@@ -3,7 +3,7 @@ from keywords import *
 from random import randint
 
 def export_processes(processes):
-    filename=str(input("Nazwa pliku .txt? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .CSV
+    filename=str(input("Nazwa pliku .txt? (pozostawić puste, aby nie generować): "))    # Zapytanie o plik .TXT
     if filename:    # W razie zgody
         try: 
             if not os.path.isdir("in"): os.mkdir("in")    # Próba utworzenia katalogu out, jeżeli ten nie istnieje
