@@ -47,7 +47,7 @@ ALBORYTMY ZASTĘPOWANIA STRON
             cpu_do_sjf(processes_sjf)
             del processes_fifo, processes_sjf
         case 4: mem_do_fifo(create_frames(),create_calls(manual))
-        case 5: mem_do_lfu(create_frames(),create_calls(manual))
+        case 5: mem_do_lfu(create_frames(),create_calls(manual),exportPrompt=True)
         case 6:
             frames=create_frames()
             calls_fifo=create_calls(manual)
@@ -56,8 +56,7 @@ ALBORYTMY ZASTĘPOWANIA STRON
             mem_do_lfu(frames,calls_lfu)
             del calls_fifo, calls_lfu
         case 7:
-            if manual: manual=False
-            else: manual=True
+            manual^=1   # Przełączenie wartości bool negacją
             print("Przełączono tryb wpisywania danych")
         case 0: exit(0)
         case default: print("Nie rozpoznano opcji!")
