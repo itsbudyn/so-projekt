@@ -12,9 +12,10 @@ ALGORYTMY WYMIANY STRON:
 - LFU
 
 W celu uruchomienia symulatora należy uruchomić plik `main.py`
+
 Program jest obsługiwany przez interaktywne menu w konsoli.
 
-Program pozwala na:
+Funkcje:
 - Eksport wyników do formatu .csv.
 - Ręczne wprowadzenie danych, takich jak czas przybycia i czas wykonywania procesu.
 - Ręczne wprowadzanie kolejnych dostępów do stron.
