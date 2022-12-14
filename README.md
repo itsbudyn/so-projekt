@@ -1,5 +1,5 @@
 # so-projekt
-Projekt zaliczeniowy na laboratoria z systemów operacyjnych
+Projekt zaliczeniowy na laboratoria z Systemów Operacyjnych
 
 Projekt miał na celu symulację dwóch algorytmów kolejkowania procesów i dwóch algorytmów wymiany stron.
 
@@ -19,6 +19,6 @@ Funkcje:
 - Eksport wyników do formatu .csv.
 - Ręczne wprowadzenie danych, takich jak czas przybycia i czas wykonywania procesu.
 - Ręczne wprowadzanie kolejnych dostępów do stron.
-- Automatyczną generację danych wejściowych.
+- Automatyczna generacja danych wejściowych.
 - Wyświetlenie osi czasu i statystyk procesów bądź stron w danym algorytmie.
 - Uruchomienie obu algorytmów dla tych samych danych, w celu porównania wyników.
